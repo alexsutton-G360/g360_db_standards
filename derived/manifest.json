@@ -1,0 +1,2034 @@
+{
+  "generated_from": "pages/*.md",
+  "counts": {
+    "rules": 73,
+    "stories": 20,
+    "principles": 5,
+    "reference": 1,
+    "group_intros": 11
+  },
+  "rules": [
+    {
+      "slug": "lowercase-every-name",
+      "title": "Use lowercase for every name",
+      "page": "global_rules",
+      "group": "Global Rules",
+      "temperature": "Rule",
+      "origin": "general",
+      "scope": "global",
+      "why": "lowercase-only",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [
+        "shape-sorter"
+      ],
+      "has_companion": true,
+      "words_full": 51,
+      "words_brisk": 51,
+      "brisk_file": "rules/lowercase-every-name.md",
+      "companion_file": "companions/lowercase-every-name.md"
+    },
+    {
+      "slug": "underscores-between-words",
+      "title": "Separate words with underscores, never at the start or end of a name",
+      "page": "global_rules",
+      "group": "Global Rules",
+      "temperature": "Rule",
+      "origin": "house",
+      "scope": "global",
+      "why": "underscores",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 103,
+      "words_brisk": 103,
+      "brisk_file": "rules/underscores-between-words.md",
+      "companion_file": null
+    },
+    {
+      "slug": "no-special-characters-in-names",
+      "title": "Keep special characters out of names",
+      "page": "global_rules",
+      "group": "Global Rules",
+      "temperature": "Rule",
+      "origin": "general",
+      "scope": "global",
+      "why": "no-special-characters",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 28,
+      "words_brisk": 28,
+      "brisk_file": "rules/no-special-characters-in-names.md",
+      "companion_file": null
+    },
+    {
+      "slug": "spell-out-names-approved-acronyms",
+      "title": "Spell names out in common terms, and abbreviate only with an approved acronym",
+      "page": "global_rules",
+      "group": "Global Rules",
+      "temperature": "Default",
+      "origin": "general",
+      "scope": "global",
+      "why": "clear-terms",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 61,
+      "words_brisk": 61,
+      "brisk_file": "rules/spell-out-names-approved-acronyms.md",
+      "companion_file": null
+    },
+    {
+      "slug": "name-column-for-the-fact",
+      "title": "Name a column for the fact it stores, not the action it asks for",
+      "page": "columns",
+      "group": "Naming",
+      "temperature": "Default",
+      "origin": "general",
+      "scope": "column",
+      "why": "declarative-names",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [
+        "table-of-facts"
+      ],
+      "has_companion": true,
+      "words_full": 52,
+      "words_brisk": 52,
+      "brisk_file": "rules/name-column-for-the-fact.md",
+      "companion_file": "companions/name-column-for-the-fact.md"
+    },
+    {
+      "slug": "columns-in-positive-voice",
+      "title": "Name columns in the positive voice",
+      "page": "columns",
+      "group": "Naming",
+      "temperature": "Default",
+      "origin": "general",
+      "scope": "column",
+      "why": "positive-voice",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [
+        "hidden-vs-displayed"
+      ],
+      "stories": [
+        "hidden-vs-displayed"
+      ],
+      "has_companion": true,
+      "words_full": 63,
+      "words_brisk": 63,
+      "brisk_file": "rules/columns-in-positive-voice.md",
+      "companion_file": "companions/columns-in-positive-voice.md"
+    },
+    {
+      "slug": "columns-in-singular",
+      "title": "Name columns in the singular",
+      "page": "columns",
+      "group": "Naming",
+      "temperature": "Default",
+      "origin": "house",
+      "scope": "column",
+      "why": "singular-columns",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 67,
+      "words_brisk": 67,
+      "brisk_file": "rules/columns-in-singular.md",
+      "companion_file": null
+    },
+    {
+      "slug": "numbered-column-names",
+      "title": "Check what a numbered column name is really saying",
+      "page": "columns",
+      "group": "Naming",
+      "temperature": "Judgment call",
+      "origin": "house",
+      "scope": "column",
+      "why": "numbered-columns",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 115,
+      "words_brisk": 115,
+      "brisk_file": "rules/numbered-column-names.md",
+      "companion_file": null
+    },
+    {
+      "slug": "id-column-meaning",
+      "title": "A column named `id` is the table's bigint key, and `_id` points to one",
+      "page": "columns",
+      "group": "Identifiers",
+      "temperature": "Rule",
+      "origin": "house",
+      "scope": "column",
+      "why": "id-guid-identifier",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [
+        "first-week-assumption",
+        "shape-sorter"
+      ],
+      "has_companion": true,
+      "words_full": 83,
+      "words_brisk": 83,
+      "brisk_file": "rules/id-column-meaning.md",
+      "companion_file": "companions/id-column-meaning.md"
+    },
+    {
+      "slug": "guid-column-meaning",
+      "title": "A column named `guid` is a uuid, and `_guid` points to one",
+      "page": "columns",
+      "group": "Identifiers",
+      "temperature": "Rule",
+      "origin": "house",
+      "scope": "column",
+      "why": "id-guid-identifier",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [
+        "first-week-assumption",
+        "shape-sorter"
+      ],
+      "has_companion": true,
+      "words_full": 85,
+      "words_brisk": 85,
+      "brisk_file": "rules/guid-column-meaning.md",
+      "companion_file": "companions/guid-column-meaning.md"
+    },
+    {
+      "slug": "identifier-for-other-ids",
+      "title": "Use `identifier` for any identifying value that is neither an id nor a guid",
+      "page": "columns",
+      "group": "Identifiers",
+      "temperature": "Rule",
+      "origin": "house",
+      "scope": "column",
+      "why": "id-guid-identifier",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [
+        "first-week-assumption",
+        "shape-sorter"
+      ],
+      "has_companion": true,
+      "words_full": 28,
+      "words_brisk": 28,
+      "brisk_file": "rules/identifier-for-other-ids.md",
+      "companion_file": "companions/identifier-for-other-ids.md"
+    },
+    {
+      "slug": "same-database-pointer-needs-fk",
+      "title": "A column that points at a row in the same database needs a real foreign key",
+      "page": "columns",
+      "group": "Identifiers",
+      "temperature": "Rule",
+      "origin": "general",
+      "scope": "column",
+      "why": "real-foreign-keys",
+      "second_opinion": null,
+      "cites_rules": [
+        "polymorphic-decision-matrix",
+        "source-type-id-pattern"
+      ],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 306,
+      "words_brisk": 306,
+      "brisk_file": "rules/same-database-pointer-needs-fk.md",
+      "companion_file": null
+    },
+    {
+      "slug": "by-column-is-user-guid",
+      "title": "A column ending in `_by` holds a user guid from identity_service",
+      "page": "columns",
+      "group": "Identifiers",
+      "temperature": "Rule",
+      "origin": "house",
+      "scope": "column",
+      "why": "by-columns",
+      "second_opinion": "Data Architect.",
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [
+        "almost-every-table"
+      ],
+      "has_companion": true,
+      "words_full": 205,
+      "words_brisk": 205,
+      "brisk_file": "rules/by-column-is-user-guid.md",
+      "companion_file": "companions/by-column-is-user-guid.md"
+    },
+    {
+      "slug": "by-column-when-no-user",
+      "title": "What a `_by` column holds when no user acted is an open decision",
+      "page": "columns",
+      "group": "Identifiers",
+      "temperature": "Judgment call",
+      "origin": "house",
+      "scope": "column",
+      "why": "system-actors",
+      "second_opinion": "Data Architect.",
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 133,
+      "words_brisk": 133,
+      "brisk_file": "rules/by-column-when-no-user.md",
+      "companion_file": null
+    },
+    {
+      "slug": "not-null-until-null-has-meaning",
+      "title": "Make every column NOT NULL until you can say what a null in it would mean",
+      "page": "columns",
+      "group": "Nullability",
+      "temperature": "Default",
+      "origin": "general",
+      "scope": "column",
+      "why": "null-needs-a-meaning",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 339,
+      "words_brisk": 339,
+      "brisk_file": "rules/not-null-until-null-has-meaning.md",
+      "companion_file": null
+    },
+    {
+      "slug": "plan-for-existing-rows",
+      "title": "Give a NOT NULL column a plan for the rows already in the table",
+      "page": "columns",
+      "group": "Nullability",
+      "temperature": "Rule",
+      "origin": "general",
+      "scope": "column",
+      "why": "not-null-existing-rows",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 239,
+      "words_brisk": 239,
+      "brisk_file": "rules/plan-for-existing-rows.md",
+      "companion_file": null
+    },
+    {
+      "slug": "nullable-boolean-three-states",
+      "title": "Use a nullable boolean only when true, false, and unknown are all real answers",
+      "page": "columns",
+      "group": "Nullability",
+      "temperature": "Rule",
+      "origin": "general",
+      "scope": "column",
+      "why": "null-needs-a-meaning",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 67,
+      "words_brisk": 67,
+      "brisk_file": "rules/nullable-boolean-three-states.md",
+      "companion_file": null
+    },
+    {
+      "slug": "date-for-day-timestamptz-for-moment",
+      "title": "Use `date` for a day and `timestamptz` for a moment",
+      "page": "columns",
+      "group": "Dates and times",
+      "temperature": "Rule",
+      "origin": "general",
+      "scope": "column",
+      "why": "timestamptz-utc",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [
+        "unlabeled-timestamps",
+        "future-local-time"
+      ],
+      "has_companion": true,
+      "words_full": 35,
+      "words_brisk": 35,
+      "brisk_file": "rules/date-for-day-timestamptz-for-moment.md",
+      "companion_file": "companions/date-for-day-timestamptz-for-moment.md"
+    },
+    {
+      "slug": "date-name-preposition-match",
+      "title": "If a date or timestamp name ends in a preposition, make it match the type",
+      "page": "columns",
+      "group": "Dates and times",
+      "temperature": "Default",
+      "origin": "general",
+      "scope": "column",
+      "why": "date-prepositions",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 112,
+      "words_brisk": 112,
+      "brisk_file": "rules/date-name-preposition-match.md",
+      "companion_file": null
+    },
+    {
+      "slug": "no-timestamp-without-time-zone",
+      "title": "Never use `timestamp` without a time zone",
+      "page": "columns",
+      "group": "Dates and times",
+      "temperature": "Rule",
+      "origin": "general",
+      "scope": "column",
+      "why": "timestamptz-utc",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [
+        "unlabeled-timestamps",
+        "future-local-time"
+      ],
+      "has_companion": true,
+      "words_full": 58,
+      "words_brisk": 58,
+      "brisk_file": "rules/no-timestamp-without-time-zone.md",
+      "companion_file": "companions/no-timestamp-without-time-zone.md"
+    },
+    {
+      "slug": "store-utc-convert-for-display",
+      "title": "Store timestamps in UTC and convert only for display",
+      "page": "columns",
+      "group": "Dates and times",
+      "temperature": "Rule",
+      "origin": "general",
+      "scope": "column",
+      "why": "timestamptz-utc",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [
+        "unlabeled-timestamps",
+        "future-local-time"
+      ],
+      "has_companion": true,
+      "words_full": 36,
+      "words_brisk": 36,
+      "brisk_file": "rules/store-utc-convert-for-display.md",
+      "companion_file": "companions/store-utc-convert-for-display.md"
+    },
+    {
+      "slug": "varchar-over-char-and-text",
+      "title": "Use varchar, not char or text",
+      "page": "columns",
+      "group": "Text",
+      "temperature": "Rule",
+      "origin": "general",
+      "scope": "column",
+      "why": "varchar-vs-text",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [
+        "shape-sorter",
+        "warehouse-view-crash"
+      ],
+      "has_companion": true,
+      "words_full": 53,
+      "words_brisk": 53,
+      "brisk_file": "rules/varchar-over-char-and-text.md",
+      "companion_file": "companions/varchar-over-char-and-text.md"
+    },
+    {
+      "slug": "smallest-honest-varchar-limit",
+      "title": "Give every varchar the smallest limit your data honestly allows",
+      "page": "columns",
+      "group": "Text",
+      "temperature": "Default",
+      "origin": "general",
+      "scope": "column",
+      "why": "varchar-limits",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [
+        "notes-field-surprises"
+      ],
+      "has_companion": true,
+      "words_full": 62,
+      "words_brisk": 62,
+      "brisk_file": "rules/smallest-honest-varchar-limit.md",
+      "companion_file": "companions/smallest-honest-varchar-limit.md"
+    },
+    {
+      "slug": "varchar-ceiling-65535",
+      "title": "Never go above varchar(65,535)",
+      "page": "columns",
+      "group": "Text",
+      "temperature": "Rule",
+      "origin": "general",
+      "scope": "column",
+      "why": "redshift-varchar-ceiling",
+      "second_opinion": "DBA or Data Architect, before creating anything longer.",
+      "cites_rules": [],
+      "cites_stories": [
+        "multibyte-text"
+      ],
+      "stories": [
+        "warehouse-view-crash",
+        "multibyte-text"
+      ],
+      "has_companion": true,
+      "words_full": 111,
+      "words_brisk": 111,
+      "brisk_file": "rules/varchar-ceiling-65535.md",
+      "companion_file": "companions/varchar-ceiling-65535.md"
+    },
+    {
+      "slug": "email-varchar-254",
+      "title": "Email addresses: varchar(254)",
+      "page": "columns",
+      "group": "Text",
+      "temperature": "Default",
+      "origin": "general",
+      "scope": "column",
+      "why": "email-limits",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [
+        "email-length-limits"
+      ],
+      "has_companion": true,
+      "words_full": 33,
+      "words_brisk": 33,
+      "brisk_file": "rules/email-varchar-254.md",
+      "companion_file": "companions/email-varchar-254.md"
+    },
+    {
+      "slug": "url-varchar-2048",
+      "title": "Store a URL in varchar(2048)",
+      "page": "columns",
+      "group": "Text",
+      "temperature": "Default",
+      "origin": "general",
+      "scope": "column",
+      "why": "url-limits",
+      "second_opinion": null,
+      "cites_rules": [
+        "smallest-honest-varchar-limit"
+      ],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 142,
+      "words_brisk": 142,
+      "brisk_file": "rules/url-varchar-2048.md",
+      "companion_file": null
+    },
+    {
+      "slug": "no-honest-limit-decide-where",
+      "title": "When data has no honest upper limit, decide on purpose where the limit lives",
+      "page": "columns",
+      "group": "Text",
+      "temperature": "Judgment call",
+      "origin": "general",
+      "scope": "column",
+      "why": "unbounded-data",
+      "second_opinion": "DBA or Data Architect.",
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [
+        "image-documents",
+        "multibyte-text"
+      ],
+      "has_companion": true,
+      "words_full": 227,
+      "words_brisk": 227,
+      "brisk_file": "rules/no-honest-limit-decide-where.md",
+      "companion_file": "companions/no-honest-limit-decide-where.md"
+    },
+    {
+      "slug": "no-delimited-list-strings",
+      "title": "Never store a list of values as one delimited string",
+      "page": "columns",
+      "group": "Text",
+      "temperature": "Rule",
+      "origin": "general",
+      "scope": "column",
+      "why": "lists-or-tables",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [
+        "contact-list"
+      ],
+      "has_companion": true,
+      "words_full": 142,
+      "words_brisk": 142,
+      "brisk_file": "rules/no-delimited-list-strings.md",
+      "companion_file": "companions/no-delimited-list-strings.md"
+    },
+    {
+      "slug": "short-text-is-a-fixed-set",
+      "title": "Treat a short text column as a fixed set unless there is a reason it is not",
+      "page": "columns",
+      "group": "Values from a fixed set",
+      "temperature": "Default",
+      "origin": "general",
+      "scope": "column",
+      "why": "constrained-values",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 159,
+      "words_brisk": 159,
+      "brisk_file": "rules/short-text-is-a-fixed-set.md",
+      "companion_file": null
+    },
+    {
+      "slug": "database-enforces-fixed-set",
+      "title": "Have the database enforce a fixed set of values",
+      "page": "columns",
+      "group": "Values from a fixed set",
+      "temperature": "Rule",
+      "origin": "general",
+      "scope": "column",
+      "why": "constrained-values",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 65,
+      "words_brisk": 65,
+      "brisk_file": "rules/database-enforces-fixed-set.md",
+      "companion_file": null
+    },
+    {
+      "slug": "choose-fixed-set-mechanism",
+      "title": "Choose how to enforce a fixed set by asking what each value carries",
+      "page": "columns",
+      "group": "Values from a fixed set",
+      "temperature": "Judgment call",
+      "origin": "general",
+      "scope": "column",
+      "why": "constrained-values",
+      "second_opinion": null,
+      "cites_rules": [
+        "not-null-until-null-has-meaning"
+      ],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 554,
+      "words_brisk": 554,
+      "brisk_file": "rules/choose-fixed-set-mechanism.md",
+      "companion_file": null
+    },
+    {
+      "slug": "currency-code-column",
+      "title": "Store a currency's code in `currency_code`",
+      "page": "columns",
+      "group": "Currency",
+      "temperature": "Rule",
+      "origin": "general",
+      "scope": "column",
+      "why": "currency-major-units",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [
+        "major-units-by-paste"
+      ],
+      "has_companion": true,
+      "words_full": 257,
+      "words_brisk": 257,
+      "brisk_file": "rules/currency-code-column.md",
+      "companion_file": "companions/currency-code-column.md"
+    },
+    {
+      "slug": "no-float-for-money",
+      "title": "Never store money in float, real, or double",
+      "page": "columns",
+      "group": "Currency",
+      "temperature": "Rule",
+      "origin": "general",
+      "scope": "column",
+      "why": "currency-major-units",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [
+        "major-units-by-paste"
+      ],
+      "has_companion": true,
+      "words_full": 118,
+      "words_brisk": 118,
+      "brisk_file": "rules/no-float-for-money.md",
+      "companion_file": "companions/no-float-for-money.md"
+    },
+    {
+      "slug": "money-in-minor-units",
+      "title": "Store money as minor units in a bigint",
+      "page": "columns",
+      "group": "Currency",
+      "temperature": "Default",
+      "origin": "general",
+      "scope": "column",
+      "why": "currency-major-units",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [
+        "major-units-by-paste"
+      ],
+      "has_companion": true,
+      "words_full": 152,
+      "words_brisk": 152,
+      "brisk_file": "rules/money-in-minor-units.md",
+      "companion_file": "companions/money-in-minor-units.md"
+    },
+    {
+      "slug": "money-column-minor-units-name",
+      "title": "Name each money column for what it holds, ending in `_minor_units`",
+      "page": "columns",
+      "group": "Currency",
+      "temperature": "Default",
+      "origin": "house",
+      "scope": "column",
+      "why": "currency-major-units",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [
+        "major-units-by-paste"
+      ],
+      "has_companion": true,
+      "words_full": 19,
+      "words_brisk": 19,
+      "brisk_file": "rules/money-column-minor-units-name.md",
+      "companion_file": "companions/money-column-minor-units-name.md"
+    },
+    {
+      "slug": "derive-major-from-minor",
+      "title": "Derive major units from minor units instead of storing a second copy",
+      "page": "columns",
+      "group": "Currency",
+      "temperature": "Default",
+      "origin": "general",
+      "scope": "column",
+      "why": "currency-major-units",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [
+        "major-units-by-paste"
+      ],
+      "has_companion": true,
+      "words_full": 41,
+      "words_brisk": 41,
+      "brisk_file": "rules/derive-major-from-minor.md",
+      "companion_file": "companions/derive-major-from-minor.md"
+    },
+    {
+      "slug": "no-flat-divide-by-100",
+      "title": "Never turn minor units into major units with a flat divide by 100",
+      "page": "columns",
+      "group": "Currency",
+      "temperature": "Rule",
+      "origin": "general",
+      "scope": "column",
+      "why": "currency-major-units",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [
+        "major-units-by-paste"
+      ],
+      "stories": [
+        "major-units-by-paste"
+      ],
+      "has_companion": true,
+      "words_full": 92,
+      "words_brisk": 92,
+      "brisk_file": "rules/no-flat-divide-by-100.md",
+      "companion_file": "companions/no-flat-divide-by-100.md"
+    },
+    {
+      "slug": "major-units-standard-block",
+      "title": "Calculate major units in a generated column with the standard block",
+      "page": "columns",
+      "group": "Currency",
+      "temperature": "Default",
+      "origin": "house",
+      "scope": "column",
+      "why": "currency-major-units",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [
+        "major-units-by-paste"
+      ],
+      "has_companion": true,
+      "words_full": 234,
+      "words_brisk": 234,
+      "brisk_file": "rules/major-units-standard-block.md",
+      "companion_file": "companions/major-units-standard-block.md"
+    },
+    {
+      "slug": "same-row-value-generated-column",
+      "title": "Compute a value from other columns in the same row in the database, not in application code",
+      "page": "columns",
+      "group": "Values the database maintains",
+      "temperature": "Default",
+      "origin": "general",
+      "scope": "column",
+      "why": "calculated-columns",
+      "second_opinion": null,
+      "cites_rules": [
+        "no-second-copy-use-a-view",
+        "plain-view-before-materialized"
+      ],
+      "cites_stories": [],
+      "stories": [
+        "derived-by-process"
+      ],
+      "has_companion": true,
+      "words_full": 207,
+      "words_brisk": 207,
+      "brisk_file": "rules/same-row-value-generated-column.md",
+      "companion_file": "companions/same-row-value-generated-column.md"
+    },
+    {
+      "slug": "trigger-for-change-dependent-value",
+      "title": "When a value depends on how a row changed, let a trigger maintain it",
+      "page": "columns",
+      "group": "Values the database maintains",
+      "temperature": "Default",
+      "origin": "general",
+      "scope": "column",
+      "why": "calculated-columns",
+      "second_opinion": null,
+      "cites_rules": [
+        "shared-updated-at-trigger",
+        "trg-trigger-names",
+        "ufn-function-names"
+      ],
+      "cites_stories": [],
+      "stories": [
+        "derived-by-process"
+      ],
+      "has_companion": true,
+      "words_full": 162,
+      "words_brisk": 162,
+      "brisk_file": "rules/trigger-for-change-dependent-value.md",
+      "companion_file": "companions/trigger-for-change-dependent-value.md"
+    },
+    {
+      "slug": "created-at-updated-at-on-tables",
+      "title": "Give almost every table `created_at` and `updated_at`, and let the database manage them",
+      "page": "tables",
+      "group": "Row lifecycle",
+      "temperature": "Rule",
+      "origin": "house",
+      "scope": "table",
+      "why": "created-updated",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [
+        "rebuilt-rows"
+      ],
+      "has_companion": true,
+      "words_full": 83,
+      "words_brisk": 83,
+      "brisk_file": "rules/created-at-updated-at-on-tables.md",
+      "companion_file": "companions/created-at-updated-at-on-tables.md"
+    },
+    {
+      "slug": "shared-updated-at-trigger",
+      "title": "Keep `updated_at` current with the shared trigger, not with application code",
+      "page": "tables",
+      "group": "Row lifecycle",
+      "temperature": "Rule",
+      "origin": "house",
+      "scope": "table",
+      "why": "created-updated",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [
+        "rebuilt-rows"
+      ],
+      "has_companion": true,
+      "words_full": 372,
+      "words_brisk": 372,
+      "brisk_file": "rules/shared-updated-at-trigger.md",
+      "companion_file": "companions/shared-updated-at-trigger.md"
+    },
+    {
+      "slug": "soft-delete-default",
+      "title": "Soft-delete rows by default, with a `deleted_at` timestamp, unless there is a reason not to",
+      "page": "tables",
+      "group": "Row lifecycle",
+      "temperature": "Default",
+      "origin": "house",
+      "scope": "table",
+      "why": "soft-deletes",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [
+        "rebuilt-rows"
+      ],
+      "has_companion": true,
+      "words_full": 228,
+      "words_brisk": 228,
+      "brisk_file": "rules/soft-delete-default.md",
+      "companion_file": "companions/soft-delete-default.md"
+    },
+    {
+      "slug": "change-row-in-place",
+      "title": "Change a row in place, and do not delete it and create it again",
+      "page": "tables",
+      "group": "Row lifecycle",
+      "temperature": "Default",
+      "origin": "general",
+      "scope": "table",
+      "why": "edit-in-place",
+      "second_opinion": "any teammate.",
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [
+        "rebuilt-rows",
+        "image-order"
+      ],
+      "has_companion": true,
+      "words_full": 218,
+      "words_brisk": 218,
+      "brisk_file": "rules/change-row-in-place.md",
+      "companion_file": "companions/change-row-in-place.md"
+    },
+    {
+      "slug": "name-junction-tables-for-both-sides",
+      "title": "Name a table that joins two others for the two things it joins",
+      "page": "tables",
+      "group": "Naming tables",
+      "temperature": "Default",
+      "origin": "house",
+      "scope": "table",
+      "why": "compound-table-names",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 140,
+      "words_brisk": 140,
+      "brisk_file": "rules/name-junction-tables-for-both-sides.md",
+      "companion_file": null
+    },
+    {
+      "slug": "id-on-every-table-including-junctions",
+      "title": "Give every table an `id`, junction tables included, unless there is a stated reason not to",
+      "page": "tables",
+      "group": "Row identity",
+      "temperature": "Default",
+      "origin": "house",
+      "scope": "table",
+      "why": "id-on-every-table",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 169,
+      "words_brisk": 169,
+      "brisk_file": "rules/id-on-every-table-including-junctions.md",
+      "companion_file": null
+    },
+    {
+      "slug": "id-internal-guid-external",
+      "title": "An `id` is an internal reference, so outside the database a row is found by its `guid`",
+      "page": "tables",
+      "group": "Row identity",
+      "temperature": "Rule",
+      "origin": "general",
+      "scope": "table",
+      "why": "ids-stay-inside",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 165,
+      "words_brisk": 165,
+      "brisk_file": "rules/id-internal-guid-external.md",
+      "companion_file": null
+    },
+    {
+      "slug": "guid-for-externally-referenced-tables",
+      "title": "Give a table a `guid` when something outside the database may point at its rows, and decide when the table is created",
+      "page": "tables",
+      "group": "Row identity",
+      "temperature": "Default",
+      "origin": "house",
+      "scope": "table",
+      "why": "ids-stay-inside",
+      "second_opinion": null,
+      "cites_rules": [
+        "plan-for-existing-rows"
+      ],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 219,
+      "words_brisk": 219,
+      "brisk_file": "rules/guid-for-externally-referenced-tables.md",
+      "companion_file": null
+    },
+    {
+      "slug": "guid-not-null-unique-generated-anywhere",
+      "title": "Make a `guid` NOT NULL and UNIQUE, and generate it wherever it is first needed",
+      "page": "tables",
+      "group": "Row identity",
+      "temperature": "Default",
+      "origin": "general",
+      "scope": "table",
+      "why": "guid-generation",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 261,
+      "words_brisk": 261,
+      "brisk_file": "rules/guid-not-null-unique-generated-anywhere.md",
+      "companion_file": null
+    },
+    {
+      "slug": "array-or-second-table",
+      "title": "Before using an array column, check that it is not a second table you have not made",
+      "page": "tables",
+      "group": "Lists of values",
+      "temperature": "Judgment call",
+      "origin": "general",
+      "scope": "table",
+      "why": "lists-or-tables",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [
+        "contact-list"
+      ],
+      "has_companion": true,
+      "words_full": 235,
+      "words_brisk": 235,
+      "brisk_file": "rules/array-or-second-table.md",
+      "companion_file": "companions/array-or-second-table.md"
+    },
+    {
+      "slug": "no-second-copy-use-a-view",
+      "title": "Do not keep a second copy of data that a view can derive",
+      "page": "tables",
+      "group": "Derived values and copies",
+      "temperature": "Default",
+      "origin": "general",
+      "scope": "table",
+      "why": "derived-in-view",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [
+        "header-status"
+      ],
+      "has_companion": true,
+      "words_full": 251,
+      "words_brisk": 251,
+      "brisk_file": "rules/no-second-copy-use-a-view.md",
+      "companion_file": "companions/no-second-copy-use-a-view.md"
+    },
+    {
+      "slug": "plain-view-before-materialized",
+      "title": "Start with a plain view, and move to a materialized view only when the query has earned it",
+      "page": "tables",
+      "group": "Derived values and copies",
+      "temperature": "Default",
+      "origin": "general",
+      "scope": "table",
+      "why": "derived-in-view",
+      "second_opinion": "DBA.",
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [
+        "header-status"
+      ],
+      "has_companion": true,
+      "words_full": 250,
+      "words_brisk": 250,
+      "brisk_file": "rules/plain-view-before-materialized.md",
+      "companion_file": "companions/plain-view-before-materialized.md"
+    },
+    {
+      "slug": "one-table-for-same-shape-rows",
+      "title": "When rows have the same shape whatever they belong to, keep one table and not one per parent",
+      "page": "tables",
+      "group": "Tables that belong to one of several parents",
+      "temperature": "Default",
+      "origin": "general",
+      "scope": "table",
+      "why": "polymorphic-associations",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 113,
+      "words_brisk": 113,
+      "brisk_file": "rules/one-table-for-same-shape-rows.md",
+      "companion_file": null
+    },
+    {
+      "slug": "source-type-id-pattern",
+      "title": "Recognize `source_type` and `source_id`, and use it only when the fan-out is large and an orphan is harmless",
+      "page": "tables",
+      "group": "Tables that belong to one of several parents",
+      "temperature": "Judgment call",
+      "origin": "general",
+      "scope": "table",
+      "why": "polymorphic-associations",
+      "second_opinion": "Data Architect.",
+      "cites_rules": [
+        "database-enforces-fixed-set",
+        "exclusive-arc-default",
+        "junction-table-per-parent",
+        "same-database-pointer-needs-fk"
+      ],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 365,
+      "words_brisk": 365,
+      "brisk_file": "rules/source-type-id-pattern.md",
+      "companion_file": null
+    },
+    {
+      "slug": "exclusive-arc-default",
+      "title": "Give a table that belongs to one of several parents one nullable foreign key per parent, and a check that exactly one is set",
+      "page": "tables",
+      "group": "Tables that belong to one of several parents",
+      "temperature": "Default",
+      "origin": "general",
+      "scope": "table",
+      "why": "polymorphic-associations",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 308,
+      "words_brisk": 308,
+      "brisk_file": "rules/exclusive-arc-default.md",
+      "companion_file": null
+    },
+    {
+      "slug": "junction-table-per-parent",
+      "title": "When the parents are many or keep growing and integrity still matters, use one junction table per parent",
+      "page": "tables",
+      "group": "Tables that belong to one of several parents",
+      "temperature": "Judgment call",
+      "origin": "general",
+      "scope": "table",
+      "why": "polymorphic-associations",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 265,
+      "words_brisk": 265,
+      "brisk_file": "rules/junction-table-per-parent.md",
+      "companion_file": null
+    },
+    {
+      "slug": "polymorphic-decision-matrix",
+      "title": "Choose among the three by how many parents there are and how much integrity matters",
+      "page": "tables",
+      "group": "Tables that belong to one of several parents",
+      "temperature": "Judgment call",
+      "origin": "general",
+      "scope": "table",
+      "why": "polymorphic-associations",
+      "second_opinion": "Data Architect.",
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 179,
+      "words_brisk": 179,
+      "brisk_file": "rules/polymorphic-decision-matrix.md",
+      "companion_file": null
+    },
+    {
+      "slug": "index-when-a-lookup-exists",
+      "title": "Add an index when something looks the column up, in the same change that adds the lookup",
+      "page": "tables",
+      "group": "Indexes",
+      "temperature": "Default",
+      "origin": "general",
+      "scope": "table",
+      "why": "indexes-need-a-reason",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 267,
+      "words_brisk": 267,
+      "brisk_file": "rules/index-when-a-lookup-exists.md",
+      "companion_file": null
+    },
+    {
+      "slug": "foreign-key-index-decision",
+      "title": "Decide on purpose whether a foreign key column needs an index, because the database does not make one",
+      "page": "tables",
+      "group": "Indexes",
+      "temperature": "Judgment call",
+      "origin": "general",
+      "scope": "table",
+      "why": "indexes-need-a-reason",
+      "second_opinion": null,
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 174,
+      "words_brisk": 174,
+      "brisk_file": "rules/foreign-key-index-decision.md",
+      "companion_file": null
+    },
+    {
+      "slug": "database-name-form",
+      "title": "Name a database in the singular, short and descriptive",
+      "page": "other_objects",
+      "group": "Databases and schemas",
+      "temperature": "Rule",
+      "origin": "house",
+      "scope": "database",
+      "why": "object-naming",
+      "second_opinion": "DBA.",
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 70,
+      "words_brisk": 70,
+      "brisk_file": "rules/database-name-form.md",
+      "companion_file": null
+    },
+    {
+      "slug": "schema-name-form",
+      "title": "Name a schema in the singular with no underscores",
+      "page": "other_objects",
+      "group": "Databases and schemas",
+      "temperature": "Rule",
+      "origin": "house",
+      "scope": "schema",
+      "why": "object-naming",
+      "second_opinion": "DBA.",
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 112,
+      "words_brisk": 112,
+      "brisk_file": "rules/schema-name-form.md",
+      "companion_file": null
+    },
+    {
+      "slug": "schema-for-real-divisions",
+      "title": "Use a schema where it divides a database into parts that mean something, and name it for what it holds",
+      "page": "other_objects",
+      "group": "Databases and schemas",
+      "temperature": "Default",
+      "origin": "general",
+      "scope": "schema",
+      "why": "schema-meaning",
+      "second_opinion": "DBA or Data Architect.",
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 146,
+      "words_brisk": 146,
+      "brisk_file": "rules/schema-for-real-divisions.md",
+      "companion_file": null
+    },
+    {
+      "slug": "schema-never-named-for-database",
+      "title": "Do not name a schema after its own database",
+      "page": "other_objects",
+      "group": "Databases and schemas",
+      "temperature": "Rule",
+      "origin": "general",
+      "scope": "schema",
+      "why": "schema-meaning",
+      "second_opinion": "DBA or Data Architect.",
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 134,
+      "words_brisk": 134,
+      "brisk_file": "rules/schema-never-named-for-database.md",
+      "companion_file": null
+    },
+    {
+      "slug": "pk-and-fk-names",
+      "title": "Name a primary key `pk_<table>` and a foreign key `fk_<table>_<column>`",
+      "page": "other_objects",
+      "group": "Keys, constraints, and indexes",
+      "temperature": "Rule",
+      "origin": "house",
+      "scope": "constraint",
+      "why": "object-naming",
+      "second_opinion": "DBA.",
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 135,
+      "words_brisk": 135,
+      "brisk_file": "rules/pk-and-fk-names.md",
+      "companion_file": null
+    },
+    {
+      "slug": "ctx-constraint-names",
+      "title": "Name every other constraint `ctx_<descriptor>`",
+      "page": "other_objects",
+      "group": "Keys, constraints, and indexes",
+      "temperature": "Rule",
+      "origin": "house",
+      "scope": "constraint",
+      "why": "object-naming",
+      "second_opinion": "DBA.",
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 67,
+      "words_brisk": 67,
+      "brisk_file": "rules/ctx-constraint-names.md",
+      "companion_file": null
+    },
+    {
+      "slug": "idx-index-names",
+      "title": "Name every other index `idx_<table>_<column>`",
+      "page": "other_objects",
+      "group": "Keys, constraints, and indexes",
+      "temperature": "Rule",
+      "origin": "house",
+      "scope": "index",
+      "why": "object-naming",
+      "second_opinion": "DBA.",
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 67,
+      "words_brisk": 67,
+      "brisk_file": "rules/idx-index-names.md",
+      "companion_file": null
+    },
+    {
+      "slug": "trg-trigger-names",
+      "title": "Name a trigger `trg_<table>_<descriptor>`",
+      "page": "other_objects",
+      "group": "Triggers, functions, procedures, and views",
+      "temperature": "Rule",
+      "origin": "house",
+      "scope": "trigger",
+      "why": "object-naming",
+      "second_opinion": "DBA.",
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 60,
+      "words_brisk": 60,
+      "brisk_file": "rules/trg-trigger-names.md",
+      "companion_file": null
+    },
+    {
+      "slug": "ufn-function-names",
+      "title": "Name a function `ufn_<descriptor>`",
+      "page": "other_objects",
+      "group": "Triggers, functions, procedures, and views",
+      "temperature": "Rule",
+      "origin": "house",
+      "scope": "function",
+      "why": "object-naming",
+      "second_opinion": "DBA.",
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 53,
+      "words_brisk": 53,
+      "brisk_file": "rules/ufn-function-names.md",
+      "companion_file": null
+    },
+    {
+      "slug": "usp-procedure-names",
+      "title": "Name a stored procedure `usp_<descriptor>`",
+      "page": "other_objects",
+      "group": "Triggers, functions, procedures, and views",
+      "temperature": "Rule",
+      "origin": "house",
+      "scope": "procedure",
+      "why": "object-naming",
+      "second_opinion": "DBA.",
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 54,
+      "words_brisk": 54,
+      "brisk_file": "rules/usp-procedure-names.md",
+      "companion_file": null
+    },
+    {
+      "slug": "uv-view-names",
+      "title": "Name a view `uv_<table>_<descriptor>`",
+      "page": "other_objects",
+      "group": "Triggers, functions, procedures, and views",
+      "temperature": "Rule",
+      "origin": "house",
+      "scope": "view",
+      "why": "object-naming",
+      "second_opinion": "DBA.",
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 62,
+      "words_brisk": 62,
+      "brisk_file": "rules/uv-view-names.md",
+      "companion_file": null
+    },
+    {
+      "slug": "umv-materialized-view-names",
+      "title": "Name a materialized view `umv_<table>_<descriptor>`",
+      "page": "other_objects",
+      "group": "Triggers, functions, procedures, and views",
+      "temperature": "Rule",
+      "origin": "house",
+      "scope": "materialized_view",
+      "why": "object-naming",
+      "second_opinion": "DBA.",
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 64,
+      "words_brisk": 64,
+      "brisk_file": "rules/umv-materialized-view-names.md",
+      "companion_file": null
+    },
+    {
+      "slug": "role-no-login",
+      "title": "Create a role with no login rights, named for what it covers and its access level",
+      "page": "other_objects",
+      "group": "Roles and users",
+      "temperature": "Rule",
+      "origin": "house",
+      "scope": "role",
+      "why": "role-access",
+      "second_opinion": "DBA.",
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 133,
+      "words_brisk": 133,
+      "brisk_file": "rules/role-no-login.md",
+      "companion_file": null
+    },
+    {
+      "slug": "user-and-service-account-names",
+      "title": "Name a user for the person or service it stands for, and describe a service account in its comment",
+      "page": "other_objects",
+      "group": "Roles and users",
+      "temperature": "Rule",
+      "origin": "house",
+      "scope": "user",
+      "why": "role-access",
+      "second_opinion": "DBA.",
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 103,
+      "words_brisk": 103,
+      "brisk_file": "rules/user-and-service-account-names.md",
+      "companion_file": null
+    }
+  ],
+  "stories": [
+    {
+      "slug": "table-of-facts",
+      "title": "A table is a ledger, not a to-do list",
+      "serves": [
+        "declarative-names"
+      ],
+      "page": "columns",
+      "file": "stories/table-of-facts.md"
+    },
+    {
+      "slug": "hidden-vs-displayed",
+      "title": "A column named for the button",
+      "serves": [
+        "bend-or-break",
+        "positive-voice"
+      ],
+      "page": "columns",
+      "file": "stories/hidden-vs-displayed.md"
+    },
+    {
+      "slug": "first-week-assumption",
+      "title": "What an analyst assumes in the first week",
+      "serves": [
+        "id-guid-identifier",
+        "first-assumption-correct"
+      ],
+      "page": "columns",
+      "file": "stories/first-week-assumption.md"
+    },
+    {
+      "slug": "shape-sorter",
+      "title": "The shape sorter",
+      "serves": [
+        "id-guid-identifier",
+        "lowercase-only",
+        "varchar-vs-text"
+      ],
+      "page": "columns",
+      "file": "stories/shape-sorter.md"
+    },
+    {
+      "slug": "almost-every-table",
+      "title": "Almost on every table",
+      "serves": [
+        "by-columns"
+      ],
+      "page": "columns",
+      "file": "stories/almost-every-table.md"
+    },
+    {
+      "slug": "unlabeled-timestamps",
+      "title": "Which clock was that?",
+      "serves": [
+        "timestamptz-utc"
+      ],
+      "page": "columns",
+      "file": "stories/unlabeled-timestamps.md"
+    },
+    {
+      "slug": "future-local-time",
+      "title": "A time that is a promise, not a moment",
+      "serves": [
+        "timestamptz-utc"
+      ],
+      "page": "columns",
+      "file": "stories/future-local-time.md"
+    },
+    {
+      "slug": "warehouse-view-crash",
+      "title": "The text field that took down the views",
+      "serves": [
+        "varchar-vs-text",
+        "redshift-varchar-ceiling"
+      ],
+      "page": "columns",
+      "file": "stories/warehouse-view-crash.md"
+    },
+    {
+      "slug": "notes-field-surprises",
+      "title": "What turned up in the notes fields",
+      "serves": [
+        "varchar-limits"
+      ],
+      "page": "columns",
+      "file": "stories/notes-field-surprises.md"
+    },
+    {
+      "slug": "email-length-limits",
+      "title": "Two limits on one address",
+      "serves": [
+        "email-limits"
+      ],
+      "page": "columns",
+      "file": "stories/email-length-limits.md"
+    },
+    {
+      "slug": "image-documents",
+      "title": "When the document is the data",
+      "serves": [
+        "unbounded-data"
+      ],
+      "page": "columns",
+      "file": "stories/image-documents.md"
+    },
+    {
+      "slug": "multibyte-text",
+      "title": "When characters and bytes disagree",
+      "serves": [
+        "redshift-varchar-ceiling",
+        "unbounded-data"
+      ],
+      "page": "columns",
+      "file": "stories/multibyte-text.md"
+    },
+    {
+      "slug": "major-units-by-paste",
+      "title": "Why a copied block, and why that is worth it",
+      "serves": [
+        "currency-major-units"
+      ],
+      "page": "columns",
+      "file": "stories/major-units-by-paste.md"
+    },
+    {
+      "slug": "derived-by-process",
+      "title": "The value that never needed a process",
+      "serves": [
+        "calculated-columns"
+      ],
+      "page": "columns",
+      "file": "stories/derived-by-process.md"
+    },
+    {
+      "slug": "rebuilt-rows",
+      "title": "Labels on the bags",
+      "serves": [
+        "created-updated",
+        "soft-deletes",
+        "edit-in-place"
+      ],
+      "page": "tables",
+      "file": "stories/rebuilt-rows.md"
+    },
+    {
+      "slug": "contact-list",
+      "title": "The contact list that grew up",
+      "serves": [
+        "lists-or-tables"
+      ],
+      "page": "tables",
+      "file": "stories/contact-list.md"
+    },
+    {
+      "slug": "header-status",
+      "title": "The scoreboard kept by hand",
+      "serves": [
+        "derived-in-view"
+      ],
+      "page": "tables",
+      "file": "stories/header-status.md"
+    },
+    {
+      "slug": "renamed-field",
+      "title": "A field renamed in one place",
+      "serves": [
+        "consistency-is-clarity",
+        "bend-or-break"
+      ],
+      "page": "index",
+      "file": "stories/renamed-field.md"
+    },
+    {
+      "slug": "image-order",
+      "title": "Image order",
+      "serves": [
+        "clever-is-seldom-clear",
+        "database-is-source-of-truth",
+        "first-assumption-correct",
+        "edit-in-place"
+      ],
+      "page": "index",
+      "file": "stories/image-order.md"
+    },
+    {
+      "slug": "guest-conversions",
+      "title": "Where guest conversions live",
+      "serves": [
+        "first-assumption-correct",
+        "clever-is-seldom-clear"
+      ],
+      "page": "index",
+      "file": "stories/guest-conversions.md"
+    }
+  ],
+  "principles": [
+    {
+      "slug": "first-assumption-correct",
+      "title": "The first assumption should be correct",
+      "file": "principles/first-assumption-correct.md"
+    },
+    {
+      "slug": "consistency-is-clarity",
+      "title": "Consistency is clarity",
+      "file": "principles/consistency-is-clarity.md"
+    },
+    {
+      "slug": "bend-or-break",
+      "title": "Bend or break the rules in the name of clarity",
+      "file": "principles/bend-or-break.md"
+    },
+    {
+      "slug": "database-is-source-of-truth",
+      "title": "The database is the source of truth",
+      "file": "principles/database-is-source-of-truth.md"
+    },
+    {
+      "slug": "clever-is-seldom-clear",
+      "title": "Clever is seldom clear",
+      "file": "principles/clever-is-seldom-clear.md"
+    }
+  ],
+  "why_keys": {
+    "by-columns": {
+      "rules": [
+        "by-column-is-user-guid"
+      ],
+      "stories": [
+        "almost-every-table"
+      ]
+    },
+    "calculated-columns": {
+      "rules": [
+        "same-row-value-generated-column",
+        "trigger-for-change-dependent-value"
+      ],
+      "stories": [
+        "derived-by-process"
+      ]
+    },
+    "clear-terms": {
+      "rules": [
+        "spell-out-names-approved-acronyms"
+      ],
+      "stories": []
+    },
+    "compound-table-names": {
+      "rules": [
+        "name-junction-tables-for-both-sides"
+      ],
+      "stories": []
+    },
+    "constrained-values": {
+      "rules": [
+        "short-text-is-a-fixed-set",
+        "database-enforces-fixed-set",
+        "choose-fixed-set-mechanism"
+      ],
+      "stories": []
+    },
+    "created-updated": {
+      "rules": [
+        "created-at-updated-at-on-tables",
+        "shared-updated-at-trigger"
+      ],
+      "stories": [
+        "rebuilt-rows"
+      ]
+    },
+    "currency-major-units": {
+      "rules": [
+        "currency-code-column",
+        "no-float-for-money",
+        "money-in-minor-units",
+        "money-column-minor-units-name",
+        "derive-major-from-minor",
+        "no-flat-divide-by-100",
+        "major-units-standard-block"
+      ],
+      "stories": [
+        "major-units-by-paste"
+      ]
+    },
+    "date-prepositions": {
+      "rules": [
+        "date-name-preposition-match"
+      ],
+      "stories": []
+    },
+    "declarative-names": {
+      "rules": [
+        "name-column-for-the-fact"
+      ],
+      "stories": [
+        "table-of-facts"
+      ]
+    },
+    "derived-in-view": {
+      "rules": [
+        "no-second-copy-use-a-view",
+        "plain-view-before-materialized"
+      ],
+      "stories": [
+        "header-status"
+      ]
+    },
+    "edit-in-place": {
+      "rules": [
+        "change-row-in-place"
+      ],
+      "stories": [
+        "rebuilt-rows",
+        "image-order"
+      ]
+    },
+    "email-limits": {
+      "rules": [
+        "email-varchar-254"
+      ],
+      "stories": [
+        "email-length-limits"
+      ]
+    },
+    "guid-generation": {
+      "rules": [
+        "guid-not-null-unique-generated-anywhere"
+      ],
+      "stories": []
+    },
+    "id-guid-identifier": {
+      "rules": [
+        "id-column-meaning",
+        "guid-column-meaning",
+        "identifier-for-other-ids"
+      ],
+      "stories": [
+        "first-week-assumption",
+        "shape-sorter"
+      ]
+    },
+    "id-on-every-table": {
+      "rules": [
+        "id-on-every-table-including-junctions"
+      ],
+      "stories": []
+    },
+    "ids-stay-inside": {
+      "rules": [
+        "id-internal-guid-external",
+        "guid-for-externally-referenced-tables"
+      ],
+      "stories": []
+    },
+    "indexes-need-a-reason": {
+      "rules": [
+        "index-when-a-lookup-exists",
+        "foreign-key-index-decision"
+      ],
+      "stories": []
+    },
+    "lists-or-tables": {
+      "rules": [
+        "no-delimited-list-strings",
+        "array-or-second-table"
+      ],
+      "stories": [
+        "contact-list"
+      ]
+    },
+    "lowercase-only": {
+      "rules": [
+        "lowercase-every-name"
+      ],
+      "stories": [
+        "shape-sorter"
+      ]
+    },
+    "no-special-characters": {
+      "rules": [
+        "no-special-characters-in-names"
+      ],
+      "stories": []
+    },
+    "not-null-existing-rows": {
+      "rules": [
+        "plan-for-existing-rows"
+      ],
+      "stories": []
+    },
+    "null-needs-a-meaning": {
+      "rules": [
+        "not-null-until-null-has-meaning",
+        "nullable-boolean-three-states"
+      ],
+      "stories": []
+    },
+    "numbered-columns": {
+      "rules": [
+        "numbered-column-names"
+      ],
+      "stories": []
+    },
+    "object-naming": {
+      "rules": [
+        "database-name-form",
+        "schema-name-form",
+        "pk-and-fk-names",
+        "ctx-constraint-names",
+        "idx-index-names",
+        "trg-trigger-names",
+        "ufn-function-names",
+        "usp-procedure-names",
+        "uv-view-names",
+        "umv-materialized-view-names"
+      ],
+      "stories": []
+    },
+    "polymorphic-associations": {
+      "rules": [
+        "one-table-for-same-shape-rows",
+        "source-type-id-pattern",
+        "exclusive-arc-default",
+        "junction-table-per-parent",
+        "polymorphic-decision-matrix"
+      ],
+      "stories": []
+    },
+    "positive-voice": {
+      "rules": [
+        "columns-in-positive-voice"
+      ],
+      "stories": [
+        "hidden-vs-displayed"
+      ]
+    },
+    "real-foreign-keys": {
+      "rules": [
+        "same-database-pointer-needs-fk"
+      ],
+      "stories": []
+    },
+    "redshift-varchar-ceiling": {
+      "rules": [
+        "varchar-ceiling-65535"
+      ],
+      "stories": [
+        "warehouse-view-crash",
+        "multibyte-text"
+      ]
+    },
+    "role-access": {
+      "rules": [
+        "role-no-login",
+        "user-and-service-account-names"
+      ],
+      "stories": []
+    },
+    "schema-meaning": {
+      "rules": [
+        "schema-for-real-divisions",
+        "schema-never-named-for-database"
+      ],
+      "stories": []
+    },
+    "singular-columns": {
+      "rules": [
+        "columns-in-singular"
+      ],
+      "stories": []
+    },
+    "soft-deletes": {
+      "rules": [
+        "soft-delete-default"
+      ],
+      "stories": [
+        "rebuilt-rows"
+      ]
+    },
+    "system-actors": {
+      "rules": [
+        "by-column-when-no-user"
+      ],
+      "stories": []
+    },
+    "timestamptz-utc": {
+      "rules": [
+        "date-for-day-timestamptz-for-moment",
+        "no-timestamp-without-time-zone",
+        "store-utc-convert-for-display"
+      ],
+      "stories": [
+        "unlabeled-timestamps",
+        "future-local-time"
+      ]
+    },
+    "unbounded-data": {
+      "rules": [
+        "no-honest-limit-decide-where"
+      ],
+      "stories": [
+        "image-documents",
+        "multibyte-text"
+      ]
+    },
+    "underscores": {
+      "rules": [
+        "underscores-between-words"
+      ],
+      "stories": []
+    },
+    "url-limits": {
+      "rules": [
+        "url-varchar-2048"
+      ],
+      "stories": []
+    },
+    "varchar-limits": {
+      "rules": [
+        "smallest-honest-varchar-limit"
+      ],
+      "stories": [
+        "notes-field-surprises"
+      ]
+    },
+    "varchar-vs-text": {
+      "rules": [
+        "varchar-over-char-and-text"
+      ],
+      "stories": [
+        "shape-sorter",
+        "warehouse-view-crash"
+      ]
+    }
+  }
+}

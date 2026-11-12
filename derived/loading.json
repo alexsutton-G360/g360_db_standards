@@ -1,0 +1,324 @@
+{
+  "always": [
+    "rules/lowercase-every-name.md",
+    "rules/underscores-between-words.md",
+    "rules/no-special-characters-in-names.md",
+    "rules/spell-out-names-approved-acronyms.md",
+    "reference/approved-acronyms.md"
+  ],
+  "by_scope": {
+    "column": [
+      "rules/name-column-for-the-fact.md",
+      "rules/columns-in-positive-voice.md",
+      "rules/columns-in-singular.md",
+      "rules/numbered-column-names.md",
+      "rules/id-column-meaning.md",
+      "rules/guid-column-meaning.md",
+      "rules/identifier-for-other-ids.md",
+      "rules/same-database-pointer-needs-fk.md",
+      "rules/by-column-is-user-guid.md",
+      "rules/by-column-when-no-user.md",
+      "rules/not-null-until-null-has-meaning.md",
+      "rules/plan-for-existing-rows.md",
+      "rules/nullable-boolean-three-states.md",
+      "rules/date-for-day-timestamptz-for-moment.md",
+      "rules/date-name-preposition-match.md",
+      "rules/no-timestamp-without-time-zone.md",
+      "rules/store-utc-convert-for-display.md",
+      "rules/varchar-over-char-and-text.md",
+      "rules/smallest-honest-varchar-limit.md",
+      "rules/varchar-ceiling-65535.md",
+      "rules/email-varchar-254.md",
+      "rules/url-varchar-2048.md",
+      "rules/no-honest-limit-decide-where.md",
+      "rules/no-delimited-list-strings.md",
+      "rules/short-text-is-a-fixed-set.md",
+      "rules/database-enforces-fixed-set.md",
+      "rules/choose-fixed-set-mechanism.md",
+      "rules/currency-code-column.md",
+      "rules/no-float-for-money.md",
+      "rules/money-in-minor-units.md",
+      "rules/money-column-minor-units-name.md",
+      "rules/derive-major-from-minor.md",
+      "rules/no-flat-divide-by-100.md",
+      "rules/major-units-standard-block.md",
+      "rules/same-row-value-generated-column.md",
+      "rules/trigger-for-change-dependent-value.md"
+    ],
+    "constraint": [
+      "rules/pk-and-fk-names.md",
+      "rules/ctx-constraint-names.md"
+    ],
+    "database": [
+      "rules/database-name-form.md"
+    ],
+    "function": [
+      "rules/ufn-function-names.md"
+    ],
+    "index": [
+      "rules/idx-index-names.md"
+    ],
+    "materialized_view": [
+      "rules/umv-materialized-view-names.md"
+    ],
+    "procedure": [
+      "rules/usp-procedure-names.md"
+    ],
+    "role": [
+      "rules/role-no-login.md"
+    ],
+    "schema": [
+      "rules/schema-name-form.md",
+      "rules/schema-for-real-divisions.md",
+      "rules/schema-never-named-for-database.md"
+    ],
+    "table": [
+      "rules/created-at-updated-at-on-tables.md",
+      "rules/shared-updated-at-trigger.md",
+      "rules/soft-delete-default.md",
+      "rules/change-row-in-place.md",
+      "rules/name-junction-tables-for-both-sides.md",
+      "rules/id-on-every-table-including-junctions.md",
+      "rules/id-internal-guid-external.md",
+      "rules/guid-for-externally-referenced-tables.md",
+      "rules/guid-not-null-unique-generated-anywhere.md",
+      "rules/array-or-second-table.md",
+      "rules/no-second-copy-use-a-view.md",
+      "rules/plain-view-before-materialized.md",
+      "rules/one-table-for-same-shape-rows.md",
+      "rules/source-type-id-pattern.md",
+      "rules/exclusive-arc-default.md",
+      "rules/junction-table-per-parent.md",
+      "rules/polymorphic-decision-matrix.md",
+      "rules/index-when-a-lookup-exists.md",
+      "rules/foreign-key-index-decision.md"
+    ],
+    "trigger": [
+      "rules/trg-trigger-names.md"
+    ],
+    "user": [
+      "rules/user-and-service-account-names.md"
+    ],
+    "view": [
+      "rules/uv-view-names.md"
+    ]
+  },
+  "by_page": {
+    "global_rules": [
+      "rules/lowercase-every-name.md",
+      "rules/underscores-between-words.md",
+      "rules/no-special-characters-in-names.md",
+      "rules/spell-out-names-approved-acronyms.md"
+    ],
+    "columns": [
+      "rules/name-column-for-the-fact.md",
+      "rules/columns-in-positive-voice.md",
+      "rules/columns-in-singular.md",
+      "rules/numbered-column-names.md",
+      "rules/id-column-meaning.md",
+      "rules/guid-column-meaning.md",
+      "rules/identifier-for-other-ids.md",
+      "rules/same-database-pointer-needs-fk.md",
+      "rules/by-column-is-user-guid.md",
+      "rules/by-column-when-no-user.md",
+      "rules/not-null-until-null-has-meaning.md",
+      "rules/plan-for-existing-rows.md",
+      "rules/nullable-boolean-three-states.md",
+      "rules/date-for-day-timestamptz-for-moment.md",
+      "rules/date-name-preposition-match.md",
+      "rules/no-timestamp-without-time-zone.md",
+      "rules/store-utc-convert-for-display.md",
+      "rules/varchar-over-char-and-text.md",
+      "rules/smallest-honest-varchar-limit.md",
+      "rules/varchar-ceiling-65535.md",
+      "rules/email-varchar-254.md",
+      "rules/url-varchar-2048.md",
+      "rules/no-honest-limit-decide-where.md",
+      "rules/no-delimited-list-strings.md",
+      "rules/short-text-is-a-fixed-set.md",
+      "rules/database-enforces-fixed-set.md",
+      "rules/choose-fixed-set-mechanism.md",
+      "rules/currency-code-column.md",
+      "rules/no-float-for-money.md",
+      "rules/money-in-minor-units.md",
+      "rules/money-column-minor-units-name.md",
+      "rules/derive-major-from-minor.md",
+      "rules/no-flat-divide-by-100.md",
+      "rules/major-units-standard-block.md",
+      "rules/same-row-value-generated-column.md",
+      "rules/trigger-for-change-dependent-value.md"
+    ],
+    "tables": [
+      "rules/created-at-updated-at-on-tables.md",
+      "rules/shared-updated-at-trigger.md",
+      "rules/soft-delete-default.md",
+      "rules/change-row-in-place.md",
+      "rules/name-junction-tables-for-both-sides.md",
+      "rules/id-on-every-table-including-junctions.md",
+      "rules/id-internal-guid-external.md",
+      "rules/guid-for-externally-referenced-tables.md",
+      "rules/guid-not-null-unique-generated-anywhere.md",
+      "rules/array-or-second-table.md",
+      "rules/no-second-copy-use-a-view.md",
+      "rules/plain-view-before-materialized.md",
+      "rules/one-table-for-same-shape-rows.md",
+      "rules/source-type-id-pattern.md",
+      "rules/exclusive-arc-default.md",
+      "rules/junction-table-per-parent.md",
+      "rules/polymorphic-decision-matrix.md",
+      "rules/index-when-a-lookup-exists.md",
+      "rules/foreign-key-index-decision.md"
+    ],
+    "other_objects": [
+      "rules/database-name-form.md",
+      "rules/schema-name-form.md",
+      "rules/schema-for-real-divisions.md",
+      "rules/schema-never-named-for-database.md",
+      "rules/pk-and-fk-names.md",
+      "rules/ctx-constraint-names.md",
+      "rules/idx-index-names.md",
+      "rules/trg-trigger-names.md",
+      "rules/ufn-function-names.md",
+      "rules/usp-procedure-names.md",
+      "rules/uv-view-names.md",
+      "rules/umv-materialized-view-names.md",
+      "rules/role-no-login.md",
+      "rules/user-and-service-account-names.md"
+    ]
+  },
+  "by_group": {
+    "global_rules:Global Rules": [
+      "rules/lowercase-every-name.md",
+      "rules/underscores-between-words.md",
+      "rules/no-special-characters-in-names.md",
+      "rules/spell-out-names-approved-acronyms.md"
+    ],
+    "columns:Currency": [
+      "rules/currency-code-column.md",
+      "rules/no-float-for-money.md",
+      "rules/money-in-minor-units.md",
+      "rules/money-column-minor-units-name.md",
+      "rules/derive-major-from-minor.md",
+      "rules/no-flat-divide-by-100.md",
+      "rules/major-units-standard-block.md"
+    ],
+    "columns:Dates and times": [
+      "rules/date-for-day-timestamptz-for-moment.md",
+      "rules/date-name-preposition-match.md",
+      "rules/no-timestamp-without-time-zone.md",
+      "rules/store-utc-convert-for-display.md"
+    ],
+    "columns:Identifiers": [
+      "rules/id-column-meaning.md",
+      "rules/guid-column-meaning.md",
+      "rules/identifier-for-other-ids.md",
+      "rules/same-database-pointer-needs-fk.md",
+      "rules/by-column-is-user-guid.md",
+      "rules/by-column-when-no-user.md"
+    ],
+    "columns:Naming": [
+      "rules/name-column-for-the-fact.md",
+      "rules/columns-in-positive-voice.md",
+      "rules/columns-in-singular.md",
+      "rules/numbered-column-names.md"
+    ],
+    "columns:Nullability": [
+      "rules/not-null-until-null-has-meaning.md",
+      "rules/plan-for-existing-rows.md",
+      "rules/nullable-boolean-three-states.md"
+    ],
+    "columns:Text": [
+      "rules/varchar-over-char-and-text.md",
+      "rules/smallest-honest-varchar-limit.md",
+      "rules/varchar-ceiling-65535.md",
+      "rules/email-varchar-254.md",
+      "rules/url-varchar-2048.md",
+      "rules/no-honest-limit-decide-where.md",
+      "rules/no-delimited-list-strings.md"
+    ],
+    "columns:Values from a fixed set": [
+      "rules/short-text-is-a-fixed-set.md",
+      "rules/database-enforces-fixed-set.md",
+      "rules/choose-fixed-set-mechanism.md"
+    ],
+    "columns:Values the database maintains": [
+      "rules/same-row-value-generated-column.md",
+      "rules/trigger-for-change-dependent-value.md"
+    ],
+    "tables:Derived values and copies": [
+      "rules/no-second-copy-use-a-view.md",
+      "rules/plain-view-before-materialized.md"
+    ],
+    "tables:Indexes": [
+      "rules/index-when-a-lookup-exists.md",
+      "rules/foreign-key-index-decision.md"
+    ],
+    "tables:Lists of values": [
+      "rules/array-or-second-table.md"
+    ],
+    "tables:Naming tables": [
+      "rules/name-junction-tables-for-both-sides.md"
+    ],
+    "tables:Row identity": [
+      "rules/id-on-every-table-including-junctions.md",
+      "rules/id-internal-guid-external.md",
+      "rules/guid-for-externally-referenced-tables.md",
+      "rules/guid-not-null-unique-generated-anywhere.md"
+    ],
+    "tables:Row lifecycle": [
+      "rules/created-at-updated-at-on-tables.md",
+      "rules/shared-updated-at-trigger.md",
+      "rules/soft-delete-default.md",
+      "rules/change-row-in-place.md"
+    ],
+    "tables:Tables that belong to one of several parents": [
+      "rules/one-table-for-same-shape-rows.md",
+      "rules/source-type-id-pattern.md",
+      "rules/exclusive-arc-default.md",
+      "rules/junction-table-per-parent.md",
+      "rules/polymorphic-decision-matrix.md"
+    ],
+    "other_objects:Databases and schemas": [
+      "rules/database-name-form.md",
+      "rules/schema-name-form.md",
+      "rules/schema-for-real-divisions.md",
+      "rules/schema-never-named-for-database.md"
+    ],
+    "other_objects:Keys, constraints, and indexes": [
+      "rules/pk-and-fk-names.md",
+      "rules/ctx-constraint-names.md",
+      "rules/idx-index-names.md"
+    ],
+    "other_objects:Roles and users": [
+      "rules/role-no-login.md",
+      "rules/user-and-service-account-names.md"
+    ],
+    "other_objects:Triggers, functions, procedures, and views": [
+      "rules/trg-trigger-names.md",
+      "rules/ufn-function-names.md",
+      "rules/usp-procedure-names.md",
+      "rules/uv-view-names.md",
+      "rules/umv-materialized-view-names.md"
+    ]
+  },
+  "group_intros_in_ai_set": [
+    "groups/tables--tables-that-belong-to-one-of-several-parents.md"
+  ],
+  "left_out_of_ai_set": {
+    "pages": [
+      "stock_tables"
+    ],
+    "group_intros": [
+      "groups/columns--standard-columns.md",
+      "groups/columns--currency.md",
+      "groups/tables--row-lifecycle.md",
+      "groups/tables--naming-tables.md",
+      "groups/tables--row-identity.md",
+      "groups/tables--lists-of-values.md",
+      "groups/tables--derived-values-and-copies.md",
+      "groups/tables--indexes.md",
+      "groups/other_objects--keys-constraints-and-indexes.md",
+      "groups/other_objects--roles-and-users.md"
+    ]
+  }
+}
