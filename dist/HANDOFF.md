@@ -62,7 +62,14 @@ are recorded in `codes.lock` in the standards repository and are never reused or
    check in `review.md`.
 7. **Observing companion lookups.** The agent is told to read a rule's companion before reporting a Judgment-call
    finding. A hook that logs reads of `.claude/examples/db_standards/` would show whether it does.
-8. **The generated notice** at the top of each bundle is our wording. If you use a standard header for generated
+8. **Rule injection is once per session.** `inject-rules.cjs` injects each rule file at most once per session, and
+   subagents appear to share the session. A review agent that reads a migration after another agent has done so may
+   receive none of the injected rules. Our agent therefore reads its bundles with explicit Read calls and does not
+   rely on injection. Other agents that depend on injection may be getting less than they appear to.
+9. **Overlap with `code-reviewer`.** In a trial review, `code-reviewer` reported floating-point money and naive
+   timestamps independently of our agent, so each was reported two or three times. Our rule codes make the
+   duplicates easy to spot, but the orchestrator does not merge them.
+10. **The generated notice** at the top of each bundle is our wording. If you use a standard header for generated
    files, tell us and we will switch.
 
 ## How these were checked

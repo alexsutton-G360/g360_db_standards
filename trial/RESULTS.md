@@ -18,3 +18,17 @@ Cost: each run used roughly 80k to 105k subagent tokens, mostly reading all seve
 That is the price of loading everything on every change, and it is the number to watch.
 
 Open: the agent did not raise RDBRL7 as its own finding. A real run will show whether that repeats.
+
+## Real `/review` runs (2026-11-17)
+
+Run 1 (before the read fixes): routing passed and all 12 planted problems were found. The agent opened only
+three of its nine files, with `cat | head`, and no companion at all. Findings named no stories.
+
+Run 2 (after requiring full Reads, adding `story:` markers, and pinning `opus` / `high`): all seven bundles and
+the usage rules were opened with Read, plus 17 companions, including the Judgment-call and story-bearing ones.
+Which of the three changes mattered was not isolated. To isolate the model and effort pin, revert the commit that
+adds it and rerun.
+
+Other agents in the fleet reported the same float price and naive timestamp. The verdict was `Needs changes`
+because of `RLAY8`, `RMIG18` and `RMIG25`/`RMIG28` findings, none of them ours. Every database-design finding
+was `discuss`.
