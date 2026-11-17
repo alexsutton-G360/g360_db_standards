@@ -364,7 +364,11 @@ are recorded in `codes.lock` in the standards repository and are never reused or
    contradicts `RDBOB6` (`ctx_` for check, unique, and exclusion constraints). The `uq_` prefix appears nowhere in
    your repository. We suggest `RMIG19` point at `RDBOB5` to `RDBOB7` for the prefixes, and that the migration agent
    defer to them.
-11. **The generated notice** at the top of each bundle is our wording. If you use a standard header for generated
+11. **Model and effort.** Every agent in your repository sets both fields, so we set ours to `opus` and `high`, which
+   is what most of them use (`data-migration-agent`, `architecture-layering-agent`, and nine others). In our first
+   trial run, before the other fixes, the agent inherited the session setting and skimmed its rule files. Retune
+   them under `RAGT17` as you see fit. The value is recorded on its own commit so it can be reverted alone.
+12. **The generated notice** at the top of each bundle is our wording. If you use a standard header for generated
    files, tell us and we will switch.
 
 ## How these were checked
