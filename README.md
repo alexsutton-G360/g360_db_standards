@@ -17,7 +17,11 @@ principles behind them, and where to look for what.
 | `pages/` | The standards. **This is the only place to edit.** Index, Global Rules, Columns, Tables, Other objects and tools, Stock tables. |
 | `runbook/` | The currency runbook. It is separate from the standards and covers what to do when a currency is added or changed. |
 | `derived/` | Generated from `pages/` by `tools/cut_apart.py`. **Never edit by hand.** One file per rule for agents, plus companions, stories, principles, a manifest, load hints and a rule index. |
-| `tools/` | `cut_apart.py` builds `derived/`. `lint_pages.py` checks the pages. Both are standard-library Python 3. |
+| `tools/` | `cut_apart.py` builds `derived/`. `lint_pages.py` checks the pages. `emit_agent_tree.py` builds the handoff zip. `run_target_validators.py` proves it. Standard-library Python 3 (3.11+, or `pip install tomli`). The validators need Node. |
+| `agent/` | Hand-written inputs to the handoff: `control.toml` (which rules go in which bundle), the agent template, and the usage rules. |
+| `vendor/ai_python_guidance/` | Read-only git submodule of the AI guidance repository. Nobody edits or commits inside it. |
+| `dist/`, `dist.zip` | Generated handoff for the guidance repository. **Never edit by hand.** |
+| `codes.lock` | The permanent code (for example `RDBCL3`) of every rule in the handoff. |
 | `slugs.lock` | Every stable name (rule slugs, why keys, story and principle slugs). Names listed here are never removed or renamed. |
 | `.github/` | The CI check, and a template for review ownership. |
 
@@ -38,6 +42,21 @@ Every rule has a heading and a tag line:
 
 After the tag line come the rule, a Because line, Good and Bad examples, and a Second opinion line.
 The Index explains all of this in full.
+
+## Setup
+
+After cloning, fetch the submodule once (`git clone --recurse-submodules`, or afterwards
+`git submodule update --init`). The handoff build reads one file from it, and does that for you if you forget.
+
+## Building the handoff
+
+```
+python3 tools/emit_agent_tree.py --zip     # writes dist/ and dist.zip
+python3 tools/run_target_validators.py     # runs the guidance repository's own checks on a scratch copy
+```
+
+Add `--update-lock` to the first command when a rule is new, so it receives its permanent code. Hand
+`dist.zip` to the team that maintains the guidance repository.
 
 ## Editing the standards
 

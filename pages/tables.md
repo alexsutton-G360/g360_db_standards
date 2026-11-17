@@ -15,6 +15,8 @@ Because: a value the database maintains is true no matter which application or s
 
 How to name and type a timestamp column in general is covered on Columns, under Dates and times.
 
+Agent: when a migration creates a table, give it `created_at` and `updated_at`, both `timestamptz NOT NULL DEFAULT now()`. An append-only table, where a row is never updated, gets `created_at` only. A table that skips either needs a reason stated where the table is defined. Reason: a value the database maintains is true no matter which application or script touched the row, and anything downstream, like a warehouse sync, can rely on it.
+
 ---
 
 ### Keep `updated_at` current with the shared trigger, not with application code
@@ -61,6 +63,8 @@ An update that changes nothing leaves `updated_at` alone, which protects any syn
 
 One edge: an update that changes other columns and also sets `updated_at` to the value it already had is treated as having no explicit value, and the trigger stamps the current time.
 
+Agent: when a migration adds `updated_at` to a table, keep it current with the shared function `ufn_set_updated_at` and one `BEFORE UPDATE` trigger per table, not with application code. A table with a stored generated column needs the variant with no whole-row `WHEN` that names each generated column as an argument; the exact trigger text is in the full rule (`shared-updated-at-trigger`). Reason: the trigger maintains the value for every writer, and an update that changes nothing leaves `updated_at` alone, which protects any sync keyed on it.
+
 ---
 
 ### Soft-delete rows by default, with a `deleted_at` timestamp, unless there is a reason not to
@@ -82,6 +86,8 @@ Because: a deleted row that stays can still be explained, followed by a sync, an
 Good: a row marked with `deleted_at` when a user removes it
 Bad:  a row removed with `DELETE`, leaving no trace that it ever existed
 
+Agent: when a migration creates a table whose rows can be deleted from the application's point of view, soft-delete by default: a `deleted_at timestamptz` that is null while the row is live, with the shared trigger moving `updated_at` in the same statement. Skip it when the data never changes or goes away (an audit log, an event stream), or when the table is so large that keeping deleted rows would weigh on every query and index, where a retention policy or partitioning fits instead. Reason: a deleted row that stays can still be explained, followed by a sync, and pointed at.
+
 ---
 
 ### Change a row in place, and do not delete it and create it again
@@ -99,6 +105,8 @@ Good: a child row updated where it stands when its booking changes
 Bad:  all of a booking's child rows deleted and inserted again on every save
 
 Second opinion: any teammate.
+
+Agent: when a change deletes a row and creates it again in order to change its data, update the row that exists instead; use `INSERT ... ON CONFLICT DO UPDATE` for insert-or-update, which needs a unique key to conflict on. If rebuilding rows is really right, the reason must be written down. Reason: an updated row keeps its `id` and leaves nothing behind, and whatever already saw the old row is not left holding a stray.
 
 ---
 
@@ -118,6 +126,8 @@ Because: a reader should be able to tell what kind of table they are looking at 
 Good: `user_roles`, a table that joins users and roles
 Good: `role_permissions`, a table that joins roles and permissions
 
+Agent: when a migration creates a table, name a junction table that joins two others for the two things it joins (`user_roles`, `role_permissions`), and do not give a table that is not a junction a two-noun name that reads as one; name it for what a row is and put who owns the rows in a column. Reason: the two-noun shape is the one signal that says the table joins things.
+
 ---
 
 ## Row identity
@@ -136,6 +146,8 @@ Because: this is how Groups360 builds tables, and it has found the `id` useful f
 Good: a junction table with its own `id` and a unique constraint on its two foreign keys
 Bad:  a junction table with an `id` and nothing to stop the same link from appearing twice
 
+Agent: when a migration creates a table, give it an `id`, junction tables included; a junction table also gets a unique constraint on its pair of foreign keys so the same two rows cannot be linked twice. A table without an `id` needs a reason stated where the table is defined. Reason: Groups360 finds the `id` useful for tooling and for correcting one row; it is a house convention and not a claim about correctness elsewhere.
+
 ---
 
 ### An `id` is an internal reference, so outside the database a row is found by its `guid`
@@ -150,6 +162,8 @@ Because: an `id` can be walked. Someone who sees `/users/42` can try 43, then 44
 Good: a lookup by `/users/<guid>`, and an `id` shown in an admin report
 Bad:  a lookup by `/users/42`
 
+Agent: never let an `id` be the value that finds a row from outside the database, whether in an API, a URL, or anything a person could substitute, replay, or edit; look the row up by its `guid`, and hold a reference to another service's row as a `guid`. Showing an `id` in a report or an admin panel is fine. Reason: an `id` can be walked (`/users/42`, then 43, then 44) and means nothing outside the database that issued it.
+
 ---
 
 ### Give a table a `guid` when something outside the database may point at its rows, and decide when the table is created
@@ -160,6 +174,8 @@ Most tables are never referred to from outside their own database, and carry onl
 Declare the `guid` unique when the column is created. The constraint is what makes it safe to rely on as an identifier, and it creates the index that lookups by it will need. That index enforces something true about the data and is not a guess about future queries, so it is not the kind of index the rule under Indexes on this page warns against.
 
 Because: a `guid` is simplest on the day the table is created, because every row is born with one. Adding it later is routine, but it takes steps: a value for every existing row, then the constraints, and the cost grows with the size of the table.
+
+Agent: when a migration creates a table that something outside the database may point at, give it a `guid` and decide that when the table is created; if in doubt, add it. A junction table does not get a `guid`. Declare it unique when the column is created. Reason: a `guid` is simplest on the day the table is created, since adding it later takes a backfill and then the constraints, and costs more as the table grows.
 
 ---
 
@@ -180,6 +196,8 @@ Because: the database enforces what is true about the data whoever fills the col
 Good: a guid the application generates and sends with the insert, so it can go into an S3 key before the row exists
 Good: a guid that defaults to `gen_random_uuid()`, for a table where nothing needs it before the row does
 Bad:  a guid column that allows null or has no unique constraint, whichever side generates it
+
+Agent: when a migration adds a `guid` column, make it NOT NULL and UNIQUE, enforced by the database. Either the application or the database (for example a `gen_random_uuid()` default) may generate it, so generate it where it is first needed. Reason: with those two constraints a guid that was never generated is refused, and so is one that repeats, whoever fills it in.
 
 ---
 
@@ -205,6 +223,8 @@ Because: an array looks like a column and behaves like one until the first time 
 Good: `tags varchar(50)[]`, where a tag is only a word
 Bad:  `contact_emails text[]`, where each address will need its own flag
 
+Agent: when a migration or model adds an array column, check that it is not a second table not yet made. An array fits only when each value is bare, with nothing else attached. Use a table when a value carries something of its own (a flag, a date, a status), points at another table (an array element cannot have a foreign key), or must be unique across the rows (a unique constraint compares whole arrays). The question to settle is what each value might come to carry. Reason: an array looks like a column until a value needs a fact or a link of its own, and by then the data is in the wrong shape.
+
 ---
 
 ## Derived values and copies
@@ -225,6 +245,8 @@ Because: a value that can differ from its source will, sooner or later, and ever
 Good: a parent's status read through a view that derives it from the child rows
 Bad:  a status column on a parent, filled in by application code from its child rows, with a standing clean-up to correct the drift
 
+Agent: when a migration or model adds a second table filled by copying from another, or a stored column worked out from rows in other tables (such as a header's status that sums up its bookings), derive it with a view instead of keeping a copy that code keeps in step. If something must be stored, store only what cannot be derived and put the derived part in a view on top. Reason: a stored copy can differ from its source, and everything downstream, including the warehouse, inherits the difference.
+
 ---
 
 ### Start with a plain view, and move to a materialized view only when the query has earned it
@@ -244,6 +266,8 @@ Bad:  a materialized view created for a cheap query, with no refresh plan, so th
 
 Second opinion: DBA.
 
+Agent: when a migration creates a materialized view, check that a plain view will not do: start with a plain view, and use a materialized view only when the query is heavy, read often, and the data can safely be a little behind. A materialized view needs a refresh plan, and it puts the object on the DBA's path (refresh timing, load, and monitoring). Reason: a materialized view can go stale, which is the same drift a stored copy has.
+
 ---
 
 ## Tables that belong to one of several parents
@@ -260,6 +284,8 @@ If an address has the same structure whether it belongs to a user or an org, giv
 When the rows really do differ in shape, separate tables are the honest design, and this default does not apply.
 
 Because: the structure of the database should say what is true about the data. If an address is the same thing everywhere, one table says so.
+
+Agent: when a migration creates parallel tables for the same kind of row, one per parent (such as separate address tables for users and for orgs), keep one table when the rows have the same shape whatever they belong to; separate tables are right only when the rows really differ in shape. Reason: with two tables, every change to what a row is has to be made in both places, and someone working on one may never learn the other exists.
 
 ---
 
@@ -282,6 +308,8 @@ A `source_type` column is itself a set of allowed values, so the rule on fixed s
 Because: a rule the database does not enforce is a convention and not a standard, and conventions stop holding when the code around them changes.
 
 Second opinion: Data Architect.
+
+Agent: when a migration or model adds a pair of columns where one names the parent's table (`source_type`) and the other holds the id of a row in it (`source_id`), treat it as an exception to the real-foreign-key rule: the database cannot enforce it, so deleting a parent leaves its children and an id can point at a row that never existed. It is acceptable only when both hold: the fan-out is large enough that the other two designs would add serious schema overhead, and orphans genuinely do not matter (an activity log is the standard example). If only one holds, use another design.
 
 ---
 
@@ -312,6 +340,8 @@ These columns are nullable for a reason the nullability rule on Columns accepts.
 Adding a new kind of parent takes an `ALTER TABLE`, a new nullable column with its foreign key, and a replacement check constraint. That is a migration on a live table and needs care, and the larger the table, the more care. See the note on scale on the Index. If the parents keep multiplying, see the junction-table chunk below.
 
 Because: the database is the lowest level at which something can be true, and a check constraint enforces this on every write, for good.
+
+Agent: when a table can belong to one of several parents, give it one nullable foreign key per parent, each a real foreign key, and a check constraint that counts how many are filled in (`num_nonnulls(...) = 1`, or `<= 1` if a row may belong to no parent); the full example is in the rule (`exclusive-arc-default`). Adding a parent later takes an `ALTER TABLE` with a new column, its foreign key, and a replacement check, so if parents keep multiplying see `junction-table-per-parent`. Reason: the database is the lowest level at which something can be true, and the check enforces this on every write.
 
 ---
 
@@ -345,6 +375,8 @@ The cost is more tables. Finding out what a row is attached to means checking se
 
 Because: when there are many parents and a dangling reference would do real harm, the extra tables are what it costs to keep the database enforcing the relationship.
 
+Agent: when a table can belong to one of many parents, or the parents keep growing, and a dangling reference would do real harm, keep the core table lean and give each kind of parent its own junction table, with real foreign keys and a unique constraint on the pair; a new parent is then a new table, with no migration on a live table. For a small, stable set of parents this is more than needed (use `exclusive-arc-default`). Reason: the extra tables are what it costs to keep the database enforcing the relationship.
+
 ---
 
 ### Choose among the three by how many parents there are and how much integrity matters
@@ -362,6 +394,8 @@ Start with nullable foreign keys. For most tables that is the right default, wit
 When in doubt, talk to the Data Architect before building. This is one of the places where the decision made on day one is hard to undo on day three hundred.
 
 Second opinion: Data Architect.
+
+Agent: when a table can belong to one of several parents, choose by how many kinds of parent there are and how much a dangling reference would hurt: nullable foreign keys, one per parent, for few parents; junction tables when the parents are many or growing and integrity matters; `source_type` and `source_id` only when the parents are many and orphans do no harm. Start with nullable foreign keys. This decision is hard to undo later.
 
 ---
 
@@ -385,6 +419,8 @@ Because: every index slows every write to the table and takes space whether or n
 Good: an index on `check_in_date`, added in the same change as the report that filters bookings by it
 Bad:  indexes put on three columns when the table is created, in case someone searches by them later
 
+Agent: when a migration adds an index, check that a query that exists needs it (a lookup, a join, or a sort the table is genuinely asked to do) and that it is added in the same change that introduces the query; do not add one in case it is needed someday. A missing index fails quietly as the table grows. A unique constraint that enforces something true about the data, such as a unique `guid`, makes its index a consequence of that guarantee and not a guess. Reason: every index slows every write and takes space whether or not a query uses it, so an index should name the query it serves.
+
 ---
 
 ### Decide on purpose whether a foreign key column needs an index, because the database does not make one
@@ -398,6 +434,8 @@ Because: the database enforces the link but does not make it fast, and it is eas
 
 Good: an index on `user_id` in an addresses table, because addresses are always loaded by their user
 Bad:  assuming a foreign key made the column fast to search, and finding out when the table is large
+
+Agent: when a migration adds a foreign key, decide on purpose whether its column needs an index, because the database does not make one. Index it when parent rows are deleted or changed, or when queries go from a parent to its children; leave it alone when neither happens, as with a small table that never changes or a parent that is never deleted. A table with several nullable foreign keys, like the exclusive arc, asks once per column. Reason: the database enforces the link but does not make it fast.
 
 ---
 

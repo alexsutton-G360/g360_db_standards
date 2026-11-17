@@ -1,0 +1,95 @@
+# Control file for tools/emit_agent_tree.py.
+# It decides how the 73 rules on the pages are bundled into concern files for the guidance
+# repository, what each bundle is called, and what it asks of the review agent.
+# Hand-written. Rule codes live in codes.lock and are assigned by the emitter, never here.
+#
+# Settled in NEXT_STEPS.md: every bundle is scoped by `paths` only, with no content gating.
+# A change to a group, a file name or an acronym is a decision for the data architect.
+
+[output]
+dir = "dist"
+# Where companions (the full rule and its stories) go inside the guidance repository.
+# NEVER under .claude/rules/: Claude Code loads everything there that has no `paths`.
+companions_dir = ".claude/examples/db_standards"
+generated_notice = "Generated from the Groups360 database standards repository. Edit the pages there, not this file."
+
+[loading]
+# Same for every bundle. `<pkg>` is the target's token for the service package.
+paths = ["migrations/**", "<pkg>/data/models/**"]
+
+[agent]
+name = "database-design-agent"
+template = "agent/agents/database_design_agent.md"
+# The hand-written rule file that explains how to apply the rules. Copied as is.
+usage_rules = "agent/rules/db_usage_conventions.md"
+# The file in vendor/ai_python_guidance (a read-only submodule) whose fixed sections (Guardrails, Suppression handling, Output format) are copied.
+boilerplate_from = ".claude/agents/data_migration_agent.md"
+
+# ---------------------------------------------------------------------------------------------
+# Bundles. `groups` are [page, group heading] pairs, in the order the rules should appear.
+# Every group on every rule page must be listed in exactly one bundle.
+# ---------------------------------------------------------------------------------------------
+
+[[bundle]]
+file = "db_naming_conventions.md"
+acronym = "RDBNM"
+meaning = "Rules DataBase NaMing conventions"
+title = "Naming"
+description = "Database naming conventions for columns, tables, and every other object. Apply when a migration or model names anything."
+skip = "Skip this section if the change creates, renames, or adds no database object, table, or column."
+note = "Approved short forms for names are listed in .claude/examples/db_standards/approved-acronyms.md."
+groups = [["global_rules", "Global Rules"], ["columns", "Naming"], ["tables", "Naming tables"]]
+
+[[bundle]]
+file = "db_identifier_conventions.md"
+acronym = "RDBID"
+meaning = "Rules DataBase IDentifier conventions"
+title = "Identifiers"
+description = "Identifier conventions: id and guid columns, pointers, and which tables get a guid. Apply when a migration or model adds a key or a pointer column."
+skip = "Skip this section if the change adds no table, key, or column that identifies or points to a row."
+groups = [["columns", "Identifiers"], ["tables", "Row identity"]]
+
+[[bundle]]
+file = "db_column_conventions.md"
+acronym = "RDBCL"
+meaning = "Rules DataBase CoLumn conventions"
+title = "Columns"
+description = "Column design conventions: nullability, dates and times, text limits, fixed sets, and database-maintained values. Apply when a change adds or alters a column."
+skip = "Skip this section if the change adds or alters no column."
+groups = [["columns", "Nullability"], ["columns", "Dates and times"], ["columns", "Text"], ["columns", "Values from a fixed set"], ["columns", "Values the database maintains"]]
+
+[[bundle]]
+file = "db_currency_conventions.md"
+acronym = "RDBCY"
+meaning = "Rules DataBase CurrencY conventions"
+title = "Currency"
+description = "Currency and money conventions: currency_code, minor units, and major-unit columns. Apply when a change adds or alters an amount of money or a currency code."
+skip = "Skip this section if the change adds or alters no column that holds an amount of money or a currency code."
+groups = [["columns", "Currency"]]
+
+[[bundle]]
+file = "db_table_conventions.md"
+acronym = "RDBTB"
+meaning = "Rules DataBase TaBle conventions"
+title = "Tables"
+description = "Table design conventions: created_at, updated_at, soft delete, editing in place, lists of values, and derived copies. Apply when a change creates or alters a table."
+skip = "Skip this section if the change creates or alters no table."
+groups = [["tables", "Row lifecycle"], ["tables", "Lists of values"], ["tables", "Derived values and copies"]]
+
+[[bundle]]
+file = "db_relationship_conventions.md"
+acronym = "RDBRL"
+meaning = "Rules DataBase RelationaL conventions"
+title = "Relationships and indexes"
+description = "Relationship and index conventions: tables with several possible parents, foreign keys, and indexes. Apply when a change adds a key, a parent pointer, or an index."
+skip = "Skip this section if the change adds no foreign key, parent pointer, or index."
+groups = [["tables", "Tables that belong to one of several parents"], ["tables", "Indexes"]]
+
+[[bundle]]
+file = "db_object_conventions.md"
+acronym = "RDBOB"
+meaning = "Rules DataBase OBject conventions"
+title = "Database objects"
+description = "Conventions for databases, schemas, constraints, indexes, triggers, functions, views, roles, and users. Apply when a migration creates or names one."
+skip = "Skip this section if the change creates or names no database, schema, constraint, index, trigger, function, procedure, view, role, or user."
+groups = [["other_objects", "Databases and schemas"], ["other_objects", "Keys, constraints, and indexes"], ["other_objects", "Triggers, functions, procedures, and views"], ["other_objects", "Roles and users"]]

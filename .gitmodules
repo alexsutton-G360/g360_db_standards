@@ -1,0 +1,3 @@
+[submodule "vendor/ai_python_guidance"]
+	path = vendor/ai_python_guidance
+	url = git@github.com:Groups360/ai_python_guidance.git

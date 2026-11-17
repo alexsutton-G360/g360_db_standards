@@ -26,6 +26,7 @@
       "has_companion": true,
       "words_full": 51,
       "words_brisk": 51,
+      "agent": "when a change names any database object, use lowercase only, with no capital letters. Reason: Postgres folds unquoted names to lowercase, so a name with capitals has to be wrapped in double quotes every time anyone refers to it.",
       "brisk_file": "rules/lowercase-every-name.md",
       "companion_file": "companions/lowercase-every-name.md"
     },
@@ -45,6 +46,7 @@
       "has_companion": false,
       "words_full": 103,
       "words_brisk": 103,
+      "agent": "when a change names any database object, put an underscore between the words of the name and never at its start or end; schema names are the exception, since they allow no underscores at all. Reason: a leading underscore means something elsewhere, like private names in Python, but nothing in our tables, and Postgres names the array type of every table with a leading underscore, so a table named that way can collide with one.",
       "brisk_file": "rules/underscores-between-words.md",
       "companion_file": null
     },
@@ -64,6 +66,7 @@
       "has_companion": false,
       "words_full": 28,
       "words_brisk": 28,
+      "agent": "when a change names any database object, use only letters, digits, and underscores (`guest_users`, not `guest-users`, `guest users`, or `guest_users$`).",
       "brisk_file": "rules/no-special-characters-in-names.md",
       "companion_file": null
     },
@@ -83,6 +86,7 @@
       "has_companion": false,
       "words_full": 61,
       "words_brisk": 61,
+      "agent": "when a change names any database object, choose clear, commonly accepted words, and abbreviate only with an approved acronym (`customer_account`, not `cust_acct`); the approved list is the reference file `approved-acronyms`. Reason: a newcomer who has never heard an abbreviation cannot guess it and cannot search for it.",
       "brisk_file": "rules/spell-out-names-approved-acronyms.md",
       "companion_file": null
     },
@@ -104,6 +108,7 @@
       "has_companion": true,
       "words_full": 52,
       "words_brisk": 52,
+      "agent": "when a migration or model names a column, name it for the fact it stores, not the action it asks for (`excluded_properties`, not `exclude_properties`). A table that really holds instructions, such as jobs to run, is the exception. Reason: a table records what is true about a row, not instructions for what to do with it.",
       "brisk_file": "rules/name-column-for-the-fact.md",
       "companion_file": "companions/name-column-for-the-fact.md"
     },
@@ -127,6 +132,7 @@
       "has_companion": true,
       "words_full": 63,
       "words_brisk": 63,
+      "agent": "when a migration or model names a flag column, name it for what is true, not for what is not (`is_active`, not `is_not_active`). This bends when another name reads more clearly; see the story `hidden-vs-displayed`. Reason: code that tests a negated name reads as a double negative.",
       "brisk_file": "rules/columns-in-positive-voice.md",
       "companion_file": "companions/columns-in-positive-voice.md"
     },
@@ -146,6 +152,7 @@
       "has_companion": false,
       "words_full": 67,
       "words_brisk": 67,
+      "agent": "when a migration or model names a column, use the singular (`first_name`, `user_guid`); a column that really holds many values, like an array, can be plural. Reason: a row is one instance of what its plural-named table holds, so its properties are singular.",
       "brisk_file": "rules/columns-in-singular.md",
       "companion_file": null
     },
@@ -165,6 +172,7 @@
       "has_companion": false,
       "words_full": 115,
       "words_brisk": 115,
+      "agent": "when a migration or model adds a column whose name ends in a number, such as `contact_2`, ask what the second column really is. Parallel slots can be `contact_1` and `contact_2`, but if one outranks the other or is the newer version, name each for what it is (`primary_contact` and `secondary_contact`), because a pair like `contact` and `contact_2` tells the reader that one outranks the other.",
       "brisk_file": "rules/numbered-column-names.md",
       "companion_file": null
     },
@@ -187,6 +195,7 @@
       "has_companion": true,
       "words_full": 83,
       "words_brisk": 83,
+      "agent": "when a migration or model adds a column named `id` or ending in `_id`, make it the table's auto-incrementing bigint primary key (`id`) or a bigint that points to another table's `id`, named for that table in the singular (`property_id` points to `properties.id`), and store nothing else in it, such as a uuid or an external system's reference. Reason: readers take \"id\" to describe both the type and the job of a column.",
       "brisk_file": "rules/id-column-meaning.md",
       "companion_file": "companions/id-column-meaning.md"
     },
@@ -209,6 +218,7 @@
       "has_companion": true,
       "words_full": 85,
       "words_brisk": 85,
+      "agent": "when a migration or model adds a column named `guid` or ending in `_guid`, make it a uuid: `guid` is the table's uuid identifier, and a column that points to another table's `guid` is named for that table in the singular (`rfp_guid` points to `rfps.guid`). Store nothing but a uuid in it, and never put a guid in a column named `id`. If several tables in different services share a name, add the service name: `<service_name>_<table>_guid`.",
       "brisk_file": "rules/guid-column-meaning.md",
       "companion_file": "companions/guid-column-meaning.md"
     },
@@ -231,6 +241,7 @@
       "has_companion": true,
       "words_full": 28,
       "words_brisk": 28,
+      "agent": "when a migration or model adds a column that holds an identifying value that is neither an id nor a guid, spell out the full word `identifier` (`external_identifier` for a value from another system). Reason: `external_id` would look like a foreign key to a table named `externals`.",
       "brisk_file": "rules/identifier-for-other-ids.md",
       "companion_file": "companions/identifier-for-other-ids.md"
     },
@@ -253,6 +264,7 @@
       "has_companion": false,
       "words_full": 306,
       "words_brisk": 306,
+      "agent": "when a migration or model adds a column that holds the `id` of a row in another table in the same database, declare a foreign key on it; a pointer with no key is only a convention. A pointer to a row in another database is a `_guid` and has no key. A table that can belong to one of several parents follows the polymorphic rules (`source-type-id-pattern`, `polymorphic-decision-matrix`) instead. Reason: the link has to hold no matter what code touches the data.",
       "brisk_file": "rules/same-database-pointer-needs-fk.md",
       "companion_file": null
     },
@@ -274,6 +286,7 @@
       "has_companion": true,
       "words_full": 205,
       "words_brisk": 205,
+      "agent": "when a migration or model adds a column ending in `_by`, it must hold a user guid that points to identity_service, never a name, an email, or free text. Use `_by` without further discussion only when the value is always a user guid, is never unknown (so NOT NULL), and is never a machine or an anonymous person. Otherwise name the column for what it holds, or make it nullable only if the author can say in one sentence what null means. Null never means \"a machine did it\" or \"anonymous\". Reason: enough columns already mean this that it is a default.",
       "brisk_file": "rules/by-column-is-user-guid.md",
       "companion_file": "companions/by-column-is-user-guid.md"
     },
@@ -293,6 +306,7 @@
       "has_companion": false,
       "words_full": 133,
       "words_brisk": 133,
+      "agent": "when a migration or model adds a `_by` column for an actor that may be a machine or an anonymous person, do not use null and do not make up a stand-in value; the platform has not decided what such a column holds. Reason: a null there could be read as unknown or as \"no user acted\", and the platform has not said which.",
       "brisk_file": "rules/by-column-when-no-user.md",
       "companion_file": null
     },
@@ -312,6 +326,7 @@
       "has_companion": false,
       "words_full": 339,
       "words_brisk": 339,
+      "agent": "when a migration or model adds a column, make it NOT NULL unless you can say in one sentence what a null in it means. \"Unknown\" and \"does not apply\" are honest answers; anything vaguer means the column is not ready to be nullable. Reason: an accidental null lets an invalid row in, and the fault surfaces months later.",
       "brisk_file": "rules/not-null-until-null-has-meaning.md",
       "companion_file": null
     },
@@ -331,6 +346,7 @@
       "has_companion": false,
       "words_full": 239,
       "words_brisk": 239,
+      "agent": "when a migration adds a NOT NULL column to a table that already has rows, or tightens a nullable column to NOT NULL, require one of three plans: a default that is honestly right for every old row, a backfill that finishes before the constraint is added, or a staged deploy (add nullable, start writing it, backfill, then add the constraint). The values must be real, not placeholders chosen to satisfy the constraint. Reason: the change fails outright, or takes the strongest lock on the table while rows are checked.",
       "brisk_file": "rules/plan-for-existing-rows.md",
       "companion_file": null
     },
@@ -350,6 +366,7 @@
       "has_companion": false,
       "words_full": 67,
       "words_brisk": 67,
+      "agent": "when a migration or model adds a nullable boolean, use it only if true, false, and null each mean something; for any other three-way choice, use a constrained set. Reason: a nullable boolean has three states, so all three must carry a meaning.",
       "brisk_file": "rules/nullable-boolean-three-states.md",
       "companion_file": null
     },
@@ -372,6 +389,7 @@
       "has_companion": true,
       "words_full": 35,
       "words_brisk": 35,
+      "agent": "when a migration or model adds a column for a point in time, use `date` when what matters is the day (availability on March 4, an arrival on April 1) and `timestamptz` when what matters is the moment (when a record was created).",
       "brisk_file": "rules/date-for-day-timestamptz-for-moment.md",
       "companion_file": "companions/date-for-day-timestamptz-for-moment.md"
     },
@@ -391,6 +409,7 @@
       "has_companion": false,
       "words_full": 112,
       "words_brisk": 112,
+      "agent": "when a migration or model names a date or timestamp column, end the name with `_on` only if it is a date and with `_at` only if it is a timestamp; a name with no preposition, like `arrival_date`, is always fine, and no preposition is required. Reason: a thing happens on a day and at a moment, so a mismatched preposition gives the reader a wrong first assumption.",
       "brisk_file": "rules/date-name-preposition-match.md",
       "companion_file": null
     },
@@ -413,6 +432,7 @@
       "has_companion": true,
       "words_full": 58,
       "words_brisk": 58,
+      "agent": "never use `timestamp` without a time zone; use `timestamptz`. If something truly forces a plain `timestamp`, store only UTC in it, with no exceptions. Reason: a plain timestamp drops the time zone on insert, so values that look the same can mean different times, and a column of mixed zones cannot be untangled afterward.",
       "brisk_file": "rules/no-timestamp-without-time-zone.md",
       "companion_file": "companions/no-timestamp-without-time-zone.md"
     },
@@ -435,6 +455,7 @@
       "has_companion": true,
       "words_full": 36,
       "words_brisk": 36,
+      "agent": "store every timestamp in UTC and convert to local time only in the display layer; local time almost never belongs in storage. If a case seems to need local time, read the story `future-local-time` before deciding.",
       "brisk_file": "rules/store-utc-convert-for-display.md",
       "companion_file": "companions/store-utc-convert-for-display.md"
     },
@@ -457,6 +478,7 @@
       "has_companion": true,
       "words_full": 53,
       "words_brisk": 53,
+      "agent": "when a migration or model adds a text column, use `varchar` with a limit. Do not use `char`, and `text` is almost never right; the narrow exception is data with no honest upper limit (`no-honest-limit-decide-where`). Reason: text can outgrow the warehouse and crash billing views, while char pads values with whitespace for no benefit.",
       "brisk_file": "rules/varchar-over-char-and-text.md",
       "companion_file": "companions/varchar-over-char-and-text.md"
     },
@@ -478,6 +500,7 @@
       "has_companion": true,
       "words_full": 62,
       "words_brisk": 62,
+      "agent": "when a migration or model adds a varchar, give it the smallest limit the data honestly allows (`varchar(3)` for an ISO currency code, `varchar(50)` for a free-form event name), not `text`, `varchar(255)`, or `varchar(65535)` by habit. Reason: a limit the database does not enforce is only an opinion, and raising a limit later is lossless while lowering one is not.",
       "brisk_file": "rules/smallest-honest-varchar-limit.md",
       "companion_file": "companions/smallest-honest-varchar-limit.md"
     },
@@ -502,6 +525,7 @@
       "has_companion": true,
       "words_full": 111,
       "words_brisk": 111,
+      "agent": "never create a varchar longer than 65,535 characters, even though Postgres allows more. Non-Latin text takes more bytes per character in the warehouse, so a column that may hold heavily non-Latin text can pass Postgres's limit and still hold a value too big for the warehouse (story `multibyte-text`). Reason: the warehouse cannot hold more, and one oversized value takes down every view built on that column.",
       "brisk_file": "rules/varchar-ceiling-65535.md",
       "companion_file": "companions/varchar-ceiling-65535.md"
     },
@@ -523,6 +547,7 @@
       "has_companion": true,
       "words_full": 33,
       "words_brisk": 33,
+      "agent": "when a migration or model adds a column for an email address, use `varchar(254)`; use 320 only with a very good reason. Reason: 320 is the RFC maximum, but 254 is the practical limit that mail servers along the way enforce.",
       "brisk_file": "rules/email-varchar-254.md",
       "companion_file": "companions/email-varchar-254.md"
     },
@@ -544,6 +569,7 @@
       "has_companion": false,
       "words_full": 142,
       "words_brisk": 142,
+      "agent": "when a migration or model adds a column that holds a URL, use `varchar(2048)`, or a smaller limit when the URL comes from something known and controlled; go longer only with a good reason, and never use `text` or `varchar(65535)`. Reason: about 2,000 characters works in virtually any browser, server, and search tooling, and the sitemap protocol caps URLs at 2,048.",
       "brisk_file": "rules/url-varchar-2048.md",
       "companion_file": null
     },
@@ -566,6 +592,7 @@
       "has_companion": true,
       "words_full": 227,
       "words_brisk": 227,
+      "agent": "when a migration or model adds a column that may have no honest upper limit, such as extracted document text or a raw vendor response, decide on purpose where the limit lives. Ask in order: is the length a fact about the data or a choice someone should make (a choice gets a limit); will the data reach the warehouse (if not, the data teams must be told the table is never to be ported); can it be cut at 65,535 characters; and if it must arrive whole and cannot be cut, that is a Data Architect task. Reason: the database should enforce what is true about the data.",
       "brisk_file": "rules/no-honest-limit-decide-where.md",
       "companion_file": "companions/no-honest-limit-decide-where.md"
     },
@@ -587,6 +614,7 @@
       "has_companion": true,
       "words_full": 142,
       "words_brisk": 142,
+      "agent": "when a migration or model adds a text or varchar column that holds several values in one delimited string, use an array column or a second table instead; an array such as `varchar(254)[]` keeps the varchar limit on each element. Reason: a delimited string only works while every value avoids the delimiter and every reader splits it the same way, and nothing in the database enforces either.",
       "brisk_file": "rules/no-delimited-list-strings.md",
       "companion_file": "companions/no-delimited-list-strings.md"
     },
@@ -606,6 +634,7 @@
       "has_companion": false,
       "words_full": 159,
       "words_brisk": 159,
+      "agent": "when a migration or model adds a short text column, ask whether it holds one of a known set of values; if it does or might, treat it as constrained and say so in the design, and leave it open only for a stated reason. A column named `status`, `type`, `kind`, `mode`, or `category`, or one that names a strategy or a method, likely hides a fixed set. Reason: an open column collects whatever anyone writes into it, and every reader downstream has to cope with the variations.",
       "brisk_file": "rules/short-text-is-a-fixed-set.md",
       "companion_file": null
     },
@@ -625,6 +654,7 @@
       "has_companion": false,
       "words_full": 65,
       "words_brisk": 65,
+      "agent": "when a column holds one of a fixed set of values, enforce the set in the database; a check in application code alone does not count. Reason: a limit kept in application code is an opinion, and a limit in the database is true for every writer.",
       "brisk_file": "rules/database-enforces-fixed-set.md",
       "companion_file": null
     },
@@ -646,6 +676,7 @@
       "has_companion": false,
       "words_full": 554,
       "words_brisk": 554,
+      "agent": "when a migration or model enforces a fixed set of values, choose the mechanism by asking whether each value carries anything with it, such as a display label, sort order, active flag, or description. Use a lookup table with a foreign key when values carry something or the set will expand regularly. Use a check constraint on a varchar, or an enum, when each value is only a string and the set rarely changes; an enum costs more to change, since a value cannot be dropped and moving a column onto one rewrites the table.",
       "brisk_file": "rules/choose-fixed-set-mechanism.md",
       "companion_file": null
     },
@@ -667,6 +698,7 @@
       "has_companion": true,
       "words_full": 257,
       "words_brisk": 257,
+      "agent": "when a migration or model adds a column that holds a currency code, name it `currency_code` exactly, make it `varchar(3)`, and store the uppercase ISO-4217 code (`USD`, `EUR`). Use one `currency_code` per row for all its amounts, because a second currency column on a row that holds one currency stores one fact several times. Only where a row really spans currencies, name each column for its role (`charged_currency_code`, `settlement_currency_code`). Reason: the standard major-unit block and the currency runbook find currency codes by this name.",
       "brisk_file": "rules/currency-code-column.md",
       "companion_file": "companions/currency-code-column.md"
     },
@@ -688,6 +720,7 @@
       "has_companion": true,
       "words_full": 118,
       "words_brisk": 118,
+      "agent": "never store money in `float`, `real`, or `double`. A value kept for display tends to be summed, exported, or reported on later, so be suspicious of a claim that it will stay display-only; crossing this rule needs a strong written reason. Reason: binary floating point cannot represent most decimal amounts exactly, so totals drift.",
       "brisk_file": "rules/no-float-for-money.md",
       "companion_file": "companions/no-float-for-money.md"
     },
@@ -709,6 +742,7 @@
       "has_companion": true,
       "words_full": 152,
       "words_brisk": 152,
+      "agent": "when a migration or model adds an amount of money, store it as a count of the currency's smallest unit in a `bigint` (5.00 US dollars is 500; a currency with no minor unit, like yen, stores 10,000 yen as 10000). Using `numeric` as the stored form is a deviation and needs a written reason. Reason: `numeric` needs a scale, and the right number of decimal places depends on the currency, none for yen and three for the Kuwaiti dinar.",
       "brisk_file": "rules/money-in-minor-units.md",
       "companion_file": "companions/money-in-minor-units.md"
     },
@@ -730,6 +764,7 @@
       "has_companion": true,
       "words_full": 19,
       "words_brisk": 19,
+      "agent": "when a migration or model adds a money column, name it for what it holds and end it in `_minor_units`: a single amount is `amount_minor_units`, and several are `base_price_minor_units`, `service_charge_minor_units`.",
       "brisk_file": "rules/money-column-minor-units-name.md",
       "companion_file": "companions/money-column-minor-units-name.md"
     },
@@ -751,6 +786,7 @@
       "has_companion": true,
       "words_full": 41,
       "words_brisk": 41,
+      "agent": "when a migration or model needs dollars, euros, or other major units, calculate them from the minor-unit column as `numeric(23,4)` (`decimal(23,4)` in Redshift) instead of storing a second copy. Store a major-unit column directly only when the value needs fractions of a minor unit, like half a cent.",
       "brisk_file": "rules/derive-major-from-minor.md",
       "companion_file": "companions/derive-major-from-minor.md"
     },
@@ -774,6 +810,7 @@
       "has_companion": true,
       "words_full": 92,
       "words_brisk": 92,
+      "agent": "never turn minor units into major units with a flat divide by 100; use the standard block (`major-units-standard-block`). Reason: the number of decimal places is a property of the currency: most use two, a few use none (yen), some use three (Kuwaiti dinar), and two use four.",
       "brisk_file": "rules/no-flat-divide-by-100.md",
       "companion_file": "companions/no-flat-divide-by-100.md"
     },
@@ -795,6 +832,7 @@
       "has_companion": true,
       "words_full": 234,
       "words_brisk": 234,
+      "agent": "when a migration or model adds a generated major-unit column, copy the standard block from the full rule (`major-units-standard-block`) exactly as written and change only the column names, so every copy can be found and compared. A currency not on the block's list is treated as two decimal places, and a change to a currency's decimal places means every copy must be found and updated (see the currency runbook). Reason: identical copies can all be found and compared.",
       "brisk_file": "rules/major-units-standard-block.md",
       "companion_file": "companions/major-units-standard-block.md"
     },
@@ -819,6 +857,7 @@
       "has_companion": true,
       "words_full": 207,
       "words_brisk": 207,
+      "agent": "when a migration or model adds a column whose value can be worked out from other columns in the same row, make it a generated column and not application code. A generated column can use only columns of its own row; if the value needs other tables, or must be computed when read, use a view instead (`no-second-copy-use-a-view`, `plain-view-before-materialized`). A value that depends on how the row changed cannot be generated (`trigger-for-change-dependent-value`). Reason: a derived value that code keeps in step is only as reliable as every run of that code.",
       "brisk_file": "rules/same-row-value-generated-column.md",
       "companion_file": "companions/same-row-value-generated-column.md"
     },
@@ -844,6 +883,7 @@
       "has_companion": true,
       "words_full": 162,
       "words_brisk": 162,
+      "agent": "when a migration or model adds a value that depends on when or how a row changed, and not on its other columns, let a trigger maintain it rather than application code; a generated column cannot, because its formula must give the same answer every time. The shared `updated_at` trigger is the worked example (`shared-updated-at-trigger`). A different value gets a function of its own in the same shape, named by `trg-trigger-names` and `ufn-function-names`. Reason: a trigger maintains the value for every writer.",
       "brisk_file": "rules/trigger-for-change-dependent-value.md",
       "companion_file": "companions/trigger-for-change-dependent-value.md"
     },
@@ -865,6 +905,7 @@
       "has_companion": true,
       "words_full": 83,
       "words_brisk": 83,
+      "agent": "when a migration creates a table, give it `created_at` and `updated_at`, both `timestamptz NOT NULL DEFAULT now()`. An append-only table, where a row is never updated, gets `created_at` only. A table that skips either needs a reason stated where the table is defined. Reason: a value the database maintains is true no matter which application or script touched the row, and anything downstream, like a warehouse sync, can rely on it.",
       "brisk_file": "rules/created-at-updated-at-on-tables.md",
       "companion_file": "companions/created-at-updated-at-on-tables.md"
     },
@@ -886,6 +927,7 @@
       "has_companion": true,
       "words_full": 372,
       "words_brisk": 372,
+      "agent": "when a migration adds `updated_at` to a table, keep it current with the shared function `ufn_set_updated_at` and one `BEFORE UPDATE` trigger per table, not with application code. A table with a stored generated column needs the variant with no whole-row `WHEN` that names each generated column as an argument; the exact trigger text is in the full rule (`shared-updated-at-trigger`). Reason: the trigger maintains the value for every writer, and an update that changes nothing leaves `updated_at` alone, which protects any sync keyed on it.",
       "brisk_file": "rules/shared-updated-at-trigger.md",
       "companion_file": "companions/shared-updated-at-trigger.md"
     },
@@ -907,6 +949,7 @@
       "has_companion": true,
       "words_full": 228,
       "words_brisk": 228,
+      "agent": "when a migration creates a table whose rows can be deleted from the application's point of view, soft-delete by default: a `deleted_at timestamptz` that is null while the row is live, with the shared trigger moving `updated_at` in the same statement. Skip it when the data never changes or goes away (an audit log, an event stream), or when the table is so large that keeping deleted rows would weigh on every query and index, where a retention policy or partitioning fits instead. Reason: a deleted row that stays can still be explained, followed by a sync, and pointed at.",
       "brisk_file": "rules/soft-delete-default.md",
       "companion_file": "companions/soft-delete-default.md"
     },
@@ -929,6 +972,7 @@
       "has_companion": true,
       "words_full": 218,
       "words_brisk": 218,
+      "agent": "when a change deletes a row and creates it again in order to change its data, update the row that exists instead; use `INSERT ... ON CONFLICT DO UPDATE` for insert-or-update, which needs a unique key to conflict on. If rebuilding rows is really right, the reason must be written down. Reason: an updated row keeps its `id` and leaves nothing behind, and whatever already saw the old row is not left holding a stray.",
       "brisk_file": "rules/change-row-in-place.md",
       "companion_file": "companions/change-row-in-place.md"
     },
@@ -948,6 +992,7 @@
       "has_companion": false,
       "words_full": 140,
       "words_brisk": 140,
+      "agent": "when a migration creates a table, name a junction table that joins two others for the two things it joins (`user_roles`, `role_permissions`), and do not give a table that is not a junction a two-noun name that reads as one; name it for what a row is and put who owns the rows in a column. Reason: the two-noun shape is the one signal that says the table joins things.",
       "brisk_file": "rules/name-junction-tables-for-both-sides.md",
       "companion_file": null
     },
@@ -967,6 +1012,7 @@
       "has_companion": false,
       "words_full": 169,
       "words_brisk": 169,
+      "agent": "when a migration creates a table, give it an `id`, junction tables included; a junction table also gets a unique constraint on its pair of foreign keys so the same two rows cannot be linked twice. A table without an `id` needs a reason stated where the table is defined. Reason: Groups360 finds the `id` useful for tooling and for correcting one row; it is a house convention and not a claim about correctness elsewhere.",
       "brisk_file": "rules/id-on-every-table-including-junctions.md",
       "companion_file": null
     },
@@ -986,6 +1032,7 @@
       "has_companion": false,
       "words_full": 165,
       "words_brisk": 165,
+      "agent": "never let an `id` be the value that finds a row from outside the database, whether in an API, a URL, or anything a person could substitute, replay, or edit; look the row up by its `guid`, and hold a reference to another service's row as a `guid`. Showing an `id` in a report or an admin panel is fine. Reason: an `id` can be walked (`/users/42`, then 43, then 44) and means nothing outside the database that issued it.",
       "brisk_file": "rules/id-internal-guid-external.md",
       "companion_file": null
     },
@@ -1007,6 +1054,7 @@
       "has_companion": false,
       "words_full": 219,
       "words_brisk": 219,
+      "agent": "when a migration creates a table that something outside the database may point at, give it a `guid` and decide that when the table is created; if in doubt, add it. A junction table does not get a `guid`. Declare it unique when the column is created. Reason: a `guid` is simplest on the day the table is created, since adding it later takes a backfill and then the constraints, and costs more as the table grows.",
       "brisk_file": "rules/guid-for-externally-referenced-tables.md",
       "companion_file": null
     },
@@ -1026,6 +1074,7 @@
       "has_companion": false,
       "words_full": 261,
       "words_brisk": 261,
+      "agent": "when a migration adds a `guid` column, make it NOT NULL and UNIQUE, enforced by the database. Either the application or the database (for example a `gen_random_uuid()` default) may generate it, so generate it where it is first needed. Reason: with those two constraints a guid that was never generated is refused, and so is one that repeats, whoever fills it in.",
       "brisk_file": "rules/guid-not-null-unique-generated-anywhere.md",
       "companion_file": null
     },
@@ -1047,6 +1096,7 @@
       "has_companion": true,
       "words_full": 235,
       "words_brisk": 235,
+      "agent": "when a migration or model adds an array column, check that it is not a second table not yet made. An array fits only when each value is bare, with nothing else attached. Use a table when a value carries something of its own (a flag, a date, a status), points at another table (an array element cannot have a foreign key), or must be unique across the rows (a unique constraint compares whole arrays). The question to settle is what each value might come to carry. Reason: an array looks like a column until a value needs a fact or a link of its own, and by then the data is in the wrong shape.",
       "brisk_file": "rules/array-or-second-table.md",
       "companion_file": "companions/array-or-second-table.md"
     },
@@ -1068,6 +1118,7 @@
       "has_companion": true,
       "words_full": 251,
       "words_brisk": 251,
+      "agent": "when a migration or model adds a second table filled by copying from another, or a stored column worked out from rows in other tables (such as a header's status that sums up its bookings), derive it with a view instead of keeping a copy that code keeps in step. If something must be stored, store only what cannot be derived and put the derived part in a view on top. Reason: a stored copy can differ from its source, and everything downstream, including the warehouse, inherits the difference.",
       "brisk_file": "rules/no-second-copy-use-a-view.md",
       "companion_file": "companions/no-second-copy-use-a-view.md"
     },
@@ -1089,6 +1140,7 @@
       "has_companion": true,
       "words_full": 250,
       "words_brisk": 250,
+      "agent": "when a migration creates a materialized view, check that a plain view will not do: start with a plain view, and use a materialized view only when the query is heavy, read often, and the data can safely be a little behind. A materialized view needs a refresh plan, and it puts the object on the DBA's path (refresh timing, load, and monitoring). Reason: a materialized view can go stale, which is the same drift a stored copy has.",
       "brisk_file": "rules/plain-view-before-materialized.md",
       "companion_file": "companions/plain-view-before-materialized.md"
     },
@@ -1108,6 +1160,7 @@
       "has_companion": false,
       "words_full": 113,
       "words_brisk": 113,
+      "agent": "when a migration creates parallel tables for the same kind of row, one per parent (such as separate address tables for users and for orgs), keep one table when the rows have the same shape whatever they belong to; separate tables are right only when the rows really differ in shape. Reason: with two tables, every change to what a row is has to be made in both places, and someone working on one may never learn the other exists.",
       "brisk_file": "rules/one-table-for-same-shape-rows.md",
       "companion_file": null
     },
@@ -1132,6 +1185,7 @@
       "has_companion": false,
       "words_full": 365,
       "words_brisk": 365,
+      "agent": "when a migration or model adds a pair of columns where one names the parent's table (`source_type`) and the other holds the id of a row in it (`source_id`), treat it as an exception to the real-foreign-key rule: the database cannot enforce it, so deleting a parent leaves its children and an id can point at a row that never existed. It is acceptable only when both hold: the fan-out is large enough that the other two designs would add serious schema overhead, and orphans genuinely do not matter (an activity log is the standard example). If only one holds, use another design.",
       "brisk_file": "rules/source-type-id-pattern.md",
       "companion_file": null
     },
@@ -1151,6 +1205,7 @@
       "has_companion": false,
       "words_full": 308,
       "words_brisk": 308,
+      "agent": "when a table can belong to one of several parents, give it one nullable foreign key per parent, each a real foreign key, and a check constraint that counts how many are filled in (`num_nonnulls(...) = 1`, or `<= 1` if a row may belong to no parent); the full example is in the rule (`exclusive-arc-default`). Adding a parent later takes an `ALTER TABLE` with a new column, its foreign key, and a replacement check, so if parents keep multiplying see `junction-table-per-parent`. Reason: the database is the lowest level at which something can be true, and the check enforces this on every write.",
       "brisk_file": "rules/exclusive-arc-default.md",
       "companion_file": null
     },
@@ -1170,6 +1225,7 @@
       "has_companion": false,
       "words_full": 265,
       "words_brisk": 265,
+      "agent": "when a table can belong to one of many parents, or the parents keep growing, and a dangling reference would do real harm, keep the core table lean and give each kind of parent its own junction table, with real foreign keys and a unique constraint on the pair; a new parent is then a new table, with no migration on a live table. For a small, stable set of parents this is more than needed (use `exclusive-arc-default`). Reason: the extra tables are what it costs to keep the database enforcing the relationship.",
       "brisk_file": "rules/junction-table-per-parent.md",
       "companion_file": null
     },
@@ -1189,6 +1245,7 @@
       "has_companion": false,
       "words_full": 179,
       "words_brisk": 179,
+      "agent": "when a table can belong to one of several parents, choose by how many kinds of parent there are and how much a dangling reference would hurt: nullable foreign keys, one per parent, for few parents; junction tables when the parents are many or growing and integrity matters; `source_type` and `source_id` only when the parents are many and orphans do no harm. Start with nullable foreign keys. This decision is hard to undo later.",
       "brisk_file": "rules/polymorphic-decision-matrix.md",
       "companion_file": null
     },
@@ -1208,6 +1265,7 @@
       "has_companion": false,
       "words_full": 267,
       "words_brisk": 267,
+      "agent": "when a migration adds an index, check that a query that exists needs it (a lookup, a join, or a sort the table is genuinely asked to do) and that it is added in the same change that introduces the query; do not add one in case it is needed someday. A missing index fails quietly as the table grows. A unique constraint that enforces something true about the data, such as a unique `guid`, makes its index a consequence of that guarantee and not a guess. Reason: every index slows every write and takes space whether or not a query uses it, so an index should name the query it serves.",
       "brisk_file": "rules/index-when-a-lookup-exists.md",
       "companion_file": null
     },
@@ -1227,6 +1285,7 @@
       "has_companion": false,
       "words_full": 174,
       "words_brisk": 174,
+      "agent": "when a migration adds a foreign key, decide on purpose whether its column needs an index, because the database does not make one. Index it when parent rows are deleted or changed, or when queries go from a parent to its children; leave it alone when neither happens, as with a small table that never changes or a parent that is never deleted. A table with several nullable foreign keys, like the exclusive arc, asks once per column. Reason: the database enforces the link but does not make it fast.",
       "brisk_file": "rules/foreign-key-index-decision.md",
       "companion_file": null
     },
@@ -1246,6 +1305,7 @@
       "has_companion": false,
       "words_full": 70,
       "words_brisk": 70,
+      "agent": "when a change creates or names a database, make the name lowercase, singular, short, and descriptive, with underscores between words where there is more than one (one word is preferred); a test copy takes the same name with a suffix (`booking_service`, `booking_service_test`, not `bookings`). Reason: the pattern is a house convention, and consistency is what lets a reader tell an object from its name.",
       "brisk_file": "rules/database-name-form.md",
       "companion_file": null
     },
@@ -1265,6 +1325,7 @@
       "has_companion": false,
       "words_full": 112,
       "words_brisk": 112,
+      "agent": "when a change creates or names a schema, make the name lowercase and singular, with no underscores and no special characters (`extraction`, `public`, not `booking_service_test`); this is a convention and not a Postgres limit. A schema name that needs an underscore probably means the schema is too specific. Reason: the pattern is a house convention, and consistency is what lets a reader tell an object from its name.",
       "brisk_file": "rules/schema-name-form.md",
       "companion_file": null
     },
@@ -1284,6 +1345,7 @@
       "has_companion": false,
       "words_full": 146,
       "words_brisk": 146,
+      "agent": "when a change adds a schema, add it only where the database has parts with different purposes, and name it for what it holds (`ops`, `extraction`, `canonization`, not `misc`); `public` is fine, and this rule is neither for nor against it. Reason: a schema name that says what it holds is information a reader gets for free.",
       "brisk_file": "rules/schema-for-real-divisions.md",
       "companion_file": null
     },
@@ -1303,6 +1365,7 @@
       "has_companion": false,
       "words_full": 134,
       "words_brisk": 134,
+      "agent": "when a change creates a schema, do not name it after its own database (an `invoice_service` database does not hold an `invoice_service` schema). Reason: the warehouse names a table by its database, schema, and table, so a repeated name makes the long name longer and says nothing new.",
       "brisk_file": "rules/schema-never-named-for-database.md",
       "companion_file": null
     },
@@ -1322,6 +1385,7 @@
       "has_companion": false,
       "words_full": 135,
       "words_brisk": 135,
+      "agent": "when a migration creates a primary key or a foreign key, name the constraint when creating it: `pk_<table>` for a primary key and `fk_<table>_<column>` for a foreign key (`pk_users`, `fk_notes_user_id`), never a default such as `notes_pkey`. Postgres cuts a name at 63 characters, so shorten the table or column part and keep the prefix. Reason: the pattern is a house convention, and consistency is what lets a reader tell an object from its name.",
       "brisk_file": "rules/pk-and-fk-names.md",
       "companion_file": null
     },
@@ -1341,6 +1405,7 @@
       "has_companion": false,
       "words_full": 67,
       "words_brisk": 67,
+      "agent": "when a migration creates a check, unique, or exclusion constraint, name it `ctx_<descriptor>` for what it enforces (`ctx_exactly_one_parent`, `ctx_unique_note_rfp`), never a default such as `notes_body_check`; the index behind a unique constraint keeps the `ctx_` name. Reason: the pattern is a house convention, and consistency is what lets a reader tell an object from its name.",
       "brisk_file": "rules/ctx-constraint-names.md",
       "companion_file": null
     },
@@ -1360,6 +1425,7 @@
       "has_companion": false,
       "words_full": 67,
       "words_brisk": 67,
+      "agent": "when a migration creates a standalone index, name it `idx_<table>_<column>` for its table and the columns it covers (`idx_users_first_name`), not the name Postgres would give it; an index that a primary key or unique constraint creates keeps that constraint's name. Reason: the pattern is a house convention, and consistency is what lets a reader tell an object from its name.",
       "brisk_file": "rules/idx-index-names.md",
       "companion_file": null
     },
@@ -1379,6 +1445,7 @@
       "has_companion": false,
       "words_full": 60,
       "words_brisk": 60,
+      "agent": "when a migration creates a trigger, name it `trg_<table>_<descriptor>`, with the table it sits on and what it does (`trg_bookings_set_updated_at`, not `bookings_trigger`). Reason: the pattern is a house convention, and consistency is what lets a reader tell an object from its name.",
       "brisk_file": "rules/trg-trigger-names.md",
       "companion_file": null
     },
@@ -1398,6 +1465,7 @@
       "has_companion": false,
       "words_full": 53,
       "words_brisk": 53,
+      "agent": "when a migration creates a function, name it `ufn_<descriptor>` for what it does (`ufn_set_updated_at`, not `set_updated_at`). Reason: the prefix tells a reader that the object is user-defined and which kind it is, and that holds only if every one carries it.",
       "brisk_file": "rules/ufn-function-names.md",
       "companion_file": null
     },
@@ -1417,6 +1485,7 @@
       "has_companion": false,
       "words_full": 54,
       "words_brisk": 54,
+      "agent": "when a migration creates a stored procedure, name it `usp_<descriptor>` for what it does (`usp_db_backups`, not `backup_databases`). Reason: the prefix tells a reader that the object is user-defined and which kind it is, and that holds only if every one carries it.",
       "brisk_file": "rules/usp-procedure-names.md",
       "companion_file": null
     },
@@ -1436,6 +1505,7 @@
       "has_companion": false,
       "words_full": 62,
       "words_brisk": 62,
+      "agent": "when a migration creates a view, name it `uv_<table>_<descriptor>`, with the table it reads from and what it does (`uv_bookings_status`, not `bookings_status`). Reason: the pattern is a house convention, and consistency is what lets a reader tell an object from its name.",
       "brisk_file": "rules/uv-view-names.md",
       "companion_file": null
     },
@@ -1455,6 +1525,7 @@
       "has_companion": false,
       "words_full": 64,
       "words_brisk": 64,
+      "agent": "when a person creates a materialized view, name it `umv_<table>_<descriptor>`, with the table it reads from and what it does (`umv_bookings_monthly_totals`, not `monthly_totals`); a materialized view that an application creates is not covered. Reason: the pattern is a house convention, and consistency is what lets a reader tell an object from its name.",
       "brisk_file": "rules/umv-materialized-view-names.md",
       "companion_file": null
     },
@@ -1474,6 +1545,7 @@
       "has_companion": false,
       "words_full": 133,
       "words_brisk": 133,
+      "agent": "when a change creates a role, create it with no login rights and name it for the one thing it covers, in the singular, followed by its access level with an underscore between (`booking_ro`, `booking_rw`). Grant the access to the role and then grant the role to each person or service that needs it. Reason: when access has to grow, one role changes and not every user.",
       "brisk_file": "rules/role-no-login.md",
       "companion_file": null
     },
@@ -1493,6 +1565,7 @@
       "has_companion": false,
       "words_full": 103,
       "words_brisk": 103,
+      "agent": "when a change creates a database user, name a personal account `<name>_<team>_<access>` and a service account `svc` followed by the database and the access type (`svcbooking_ro`), and describe what a service account is for in the object's comment. Reason: the comment is what lets someone who finds a service account later learn what it is for.",
       "brisk_file": "rules/user-and-service-account-names.md",
       "companion_file": null
     }

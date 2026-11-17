@@ -16,6 +16,8 @@ Bad:  `BookingService`
 
 Applies to every object unless its own page says otherwise.
 
+Agent: when a change names any database object, use lowercase only, with no capital letters. Reason: Postgres folds unquoted names to lowercase, so a name with capitals has to be wrapped in double quotes every time anyone refers to it.
+
 ---
 
 ### Separate words with underscores, never at the start or end of a name
@@ -30,6 +32,8 @@ Bad:  `_customer_accounts`, `customer_accounts_`
 
 Applies to every object unless its own page says otherwise. Schema names are one such case: they allow no underscores at all.
 
+Agent: when a change names any database object, put an underscore between the words of the name and never at its start or end; schema names are the exception, since they allow no underscores at all. Reason: a leading underscore means something elsewhere, like private names in Python, but nothing in our tables, and Postgres names the array type of every table with a leading underscore, so a table named that way can collide with one.
+
 ---
 
 ### Keep special characters out of names
@@ -41,6 +45,8 @@ Good: `guest_users`
 Bad:  `guest-users`, `guest users`, `guest_users$`
 
 Applies to every object unless its own page says otherwise.
+
+Agent: when a change names any database object, use only letters, digits, and underscores (`guest_users`, not `guest-users`, `guest users`, or `guest_users$`).
 
 ---
 
@@ -55,6 +61,8 @@ Good: `customer_account`
 Bad:  `cust_acct`
 
 Applies to every object unless its own page says otherwise.
+
+Agent: when a change names any database object, choose clear, commonly accepted words, and abbreviate only with an approved acronym (`customer_account`, not `cust_acct`); the approved list is the reference file `approved-acronyms`. Reason: a newcomer who has never heard an abbreviation cannot guess it and cannot search for it.
 
 ---
 

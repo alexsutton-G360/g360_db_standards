@@ -16,6 +16,8 @@ Bad:  `exclude_properties`, `add_attachments`
 
 A table that really does hold instructions, such as jobs to run, is the exception.
 
+Agent: when a migration or model names a column, name it for the fact it stores, not the action it asks for (`excluded_properties`, not `exclude_properties`). A table that really holds instructions, such as jobs to run, is the exception. Reason: a table records what is true about a row, not instructions for what to do with it.
+
 ---
 
 ### Name columns in the positive voice
@@ -30,6 +32,8 @@ Bad:  `is_not_active`, `does_not_have_attachments`
 
 This one bends when another name reads more clearly. Story: `hidden-vs-displayed`.
 
+Agent: when a migration or model names a flag column, name it for what is true, not for what is not (`is_active`, not `is_not_active`). This bends when another name reads more clearly; see the story `hidden-vs-displayed`. Reason: code that tests a negated name reads as a double negative.
+
 ---
 
 ### Name columns in the singular
@@ -41,6 +45,8 @@ Good: `first_name`, `user_guid`
 Bad:  `first_names`, `user_guids`
 
 This one bends easily. A column that really holds many values, like an array, can be plural.
+
+Agent: when a migration or model names a column, use the singular (`first_name`, `user_guid`); a column that really holds many values, like an array, can be plural. Reason: a row is one instance of what its plural-named table holds, so its properties are singular.
 
 ---
 
@@ -54,6 +60,8 @@ Before adding a numbered column, ask what the second column really is. If it is 
 Good: `contact_1` and `contact_2`, when there are two parallel contacts
 Good: `primary_contact` and `secondary_contact`, when one outranks the other
 Bad:  `contact` and `contact_2`
+
+Agent: when a migration or model adds a column whose name ends in a number, such as `contact_2`, ask what the second column really is. Parallel slots can be `contact_1` and `contact_2`, but if one outranks the other or is the newer version, name each for what it is (`primary_contact` and `secondary_contact`), because a pair like `contact` and `contact_2` tells the reader that one outranks the other.
 
 ---
 
@@ -69,6 +77,8 @@ Because: readers take "id" to describe both the type and the job of a column, so
 Good: `id`, `property_id`
 Bad:  a uuid stored in `id`, an external system's reference stored in `vendor_id`
 
+Agent: when a migration or model adds a column named `id` or ending in `_id`, make it the table's auto-incrementing bigint primary key (`id`) or a bigint that points to another table's `id`, named for that table in the singular (`property_id` points to `properties.id`), and store nothing else in it, such as a uuid or an external system's reference. Reason: readers take "id" to describe both the type and the job of a column.
+
 ---
 
 ### A column named `guid` is a uuid, and `_guid` points to one
@@ -81,6 +91,8 @@ If several tables in different services share a name, add the service name to re
 Good: `guid`, `user_guid`, and `<service_name>_<table>_guid` when the table name alone is ambiguous
 Bad:  a bigint stored in `user_guid`
 
+Agent: when a migration or model adds a column named `guid` or ending in `_guid`, make it a uuid: `guid` is the table's uuid identifier, and a column that points to another table's `guid` is named for that table in the singular (`rfp_guid` points to `rfps.guid`). Store nothing but a uuid in it, and never put a guid in a column named `id`. If several tables in different services share a name, add the service name: `<service_name>_<table>_guid`.
+
 ---
 
 ### Use `identifier` for any identifying value that is neither an id nor a guid
@@ -89,6 +101,8 @@ Bad:  a bigint stored in `user_guid`
 Spell out the full word `identifier`: `external_identifier` for a value that came from another system.
 
 Because: `external_id` would look like a foreign key to a table named `externals`.
+
+Agent: when a migration or model adds a column that holds an identifying value that is neither an id nor a guid, spell out the full word `identifier` (`external_identifier` for a value from another system). Reason: `external_id` would look like a foreign key to a table named `externals`.
 
 ---
 
@@ -107,6 +121,8 @@ Because: the database is the lowest level at which something can be true. An app
 
 Good: `property_id`, with a foreign key to `properties (id)`, and `rfp_guid`, pointing at another service, with no key
 Bad:  `property_id` holding a real property id, with no foreign key declared
+
+Agent: when a migration or model adds a column that holds the `id` of a row in another table in the same database, declare a foreign key on it; a pointer with no key is only a convention. A pointer to a row in another database is a `_guid` and has no key. A table that can belong to one of several parents follows the polymorphic rules (`source-type-id-pattern`, `polymorphic-decision-matrix`) instead. Reason: the link has to hold no matter what code touches the data.
 
 ---
 
@@ -133,6 +149,8 @@ Because: enough columns already end in `_by` and mean this that it has become a 
 
 Second opinion: Data Architect.
 
+Agent: when a migration or model adds a column ending in `_by`, it must hold a user guid that points to identity_service, never a name, an email, or free text. Use `_by` without further discussion only when the value is always a user guid, is never unknown (so NOT NULL), and is never a machine or an anonymous person. Otherwise name the column for what it holds, or make it nullable only if the author can say in one sentence what null means. Null never means "a machine did it" or "anonymous". Reason: enough columns already mean this that it is a default.
+
 ---
 
 ### What a `_by` column holds when no user acted is an open decision
@@ -147,6 +165,8 @@ Until it is decided, do not use null for it, since a null there could be read as
 Open since: October 2026.
 
 Second opinion: Data Architect.
+
+Agent: when a migration or model adds a `_by` column for an actor that may be a machine or an anonymous person, do not use null and do not make up a stand-in value; the platform has not decided what such a column holds. Reason: a null there could be read as unknown or as "no user acted", and the platform has not said which.
 
 ---
 
@@ -175,6 +195,8 @@ Bad:  a hotel's room count left nullable. A hotel without one is an invalid reco
 Bad:  a lease's `end_date` left null both for "open-ended" and for "not entered yet". A reader cannot tell which, so settle on one meaning and give the other its own representation, such as a NOT NULL `is_open_ended` flag.
 Bad:  a flag for whether a property shows in search, where null is treated as false. Give it a default of false.
 
+Agent: when a migration or model adds a column, make it NOT NULL unless you can say in one sentence what a null in it means. "Unknown" and "does not apply" are honest answers; anything vaguer means the column is not ready to be nullable. Reason: an accidental null lets an invalid row in, and the fault surfaces months later.
+
 ---
 
 ### Give a NOT NULL column a plan for the rows already in the table
@@ -195,6 +217,8 @@ Because: the database refuses the change outright when existing rows would break
 Good: `is_archived` added with a default of false, because every existing row is genuinely not archived
 Bad:  `contact_email` added as NOT NULL with a default of an empty string, only so the change would go through
 
+Agent: when a migration adds a NOT NULL column to a table that already has rows, or tightens a nullable column to NOT NULL, require one of three plans: a default that is honestly right for every old row, a backfill that finishes before the constraint is added, or a staged deploy (add nullable, start writing it, backfill, then add the constraint). The values must be real, not placeholders chosen to satisfy the constraint. Reason: the change fails outright, or takes the strongest lock on the table while rows are checked.
+
 ---
 
 ### Use a nullable boolean only when true, false, and unknown are all real answers
@@ -205,6 +229,8 @@ A nullable boolean has three states, so use one only when all three mean somethi
 Good: "does this property charge for parking?", where null means it is not known whether it does
 Bad:  a nullable boolean standing in for a three-way choice that has names, like draft, hold, and confirmed
 
+Agent: when a migration or model adds a nullable boolean, use it only if true, false, and null each mean something; for any other three-way choice, use a constrained set. Reason: a nullable boolean has three states, so all three must carry a meaning.
+
 ---
 
 ## Dates and times
@@ -213,6 +239,8 @@ Bad:  a nullable boolean standing in for a three-way choice that has names, like
 [Slug: date-for-day-timestamptz-for-moment · Temperature: Rule · Origin: general · Scope: column · Why: timestamptz-utc]
 
 Use `date` when what matters is the day something happens, like availability on March 4 or an arrival on April 1. Use `timestamptz` when what matters is the moment, like when a record was created.
+
+Agent: when a migration or model adds a column for a point in time, use `date` when what matters is the day (availability on March 4, an arrival on April 1) and `timestamptz` when what matters is the moment (when a record was created).
 
 ---
 
@@ -228,6 +256,8 @@ Bad:  `approved_on` holding a `timestamptz`, `arrival_at` holding a `date`
 
 This is mostly a prohibition. It does not require a preposition, and it does not require `_on` for dates.
 
+Agent: when a migration or model names a date or timestamp column, end the name with `_on` only if it is a date and with `_at` only if it is a timestamp; a name with no preposition, like `arrival_date`, is always fine, and no preposition is required. Reason: a thing happens on a day and at a moment, so a mismatched preposition gives the reader a wrong first assumption.
+
 ---
 
 ### Never use `timestamp` without a time zone
@@ -237,6 +267,8 @@ Use `timestamptz`. If something truly forces a plain `timestamp`, store only UTC
 
 Because: a plain timestamp drops the time zone when a value is inserted, so a value that looks the same can mean different times depending on the session that wrote it, and a column of mixed zones cannot be untangled afterward.
 
+Agent: never use `timestamp` without a time zone; use `timestamptz`. If something truly forces a plain `timestamp`, store only UTC in it, with no exceptions. Reason: a plain timestamp drops the time zone on insert, so values that look the same can mean different times, and a column of mixed zones cannot be untangled afterward.
+
 ---
 
 ### Store timestamps in UTC and convert only for display
@@ -245,6 +277,8 @@ Because: a plain timestamp drops the time zone when a value is inserted, so a va
 Store every timestamp in UTC and convert to local time in the display layer. Local time almost never belongs in storage.
 
 There is nuance here, but not much. The one arguable case is told in `future-local-time`.
+
+Agent: store every timestamp in UTC and convert to local time only in the display layer; local time almost never belongs in storage. If a case seems to need local time, read the story `future-local-time` before deciding.
 
 ---
 
@@ -257,6 +291,8 @@ Use varchar, with a limit. Do not use char. Text is almost never right either, b
 
 Because: text can outgrow the warehouse and crash billing views, while char pads values with whitespace for no benefit.
 
+Agent: when a migration or model adds a text column, use `varchar` with a limit. Do not use `char`, and `text` is almost never right; the narrow exception is data with no honest upper limit (`no-honest-limit-decide-where`). Reason: text can outgrow the warehouse and crash billing views, while char pads values with whitespace for no benefit.
+
 ---
 
 ### Give every varchar the smallest limit your data honestly allows
@@ -268,6 +304,8 @@ Because: a limit the database does not enforce is only an opinion, and raising a
 
 Good: `varchar(3)` for an ISO currency code, `varchar(50)` for a free-form event name
 Bad:  `text` or `varchar(255)` for a currency code, `varchar(65535)` for an event name
+
+Agent: when a migration or model adds a varchar, give it the smallest limit the data honestly allows (`varchar(3)` for an ISO currency code, `varchar(50)` for a free-form event name), not `text`, `varchar(255)`, or `varchar(65535)` by habit. Reason: a limit the database does not enforce is only an opinion, and raising a limit later is lossless while lowering one is not.
 
 ---
 
@@ -282,6 +320,8 @@ One special case: Postgres counts the length of a varchar in characters, but the
 
 Second opinion: DBA or Data Architect, before creating anything longer.
 
+Agent: never create a varchar longer than 65,535 characters, even though Postgres allows more. Non-Latin text takes more bytes per character in the warehouse, so a column that may hold heavily non-Latin text can pass Postgres's limit and still hold a value too big for the warehouse (story `multibyte-text`). Reason: the warehouse cannot hold more, and one oversized value takes down every view built on that column.
+
 ---
 
 ### Email addresses: varchar(254)
@@ -290,6 +330,8 @@ Second opinion: DBA or Data Architect, before creating anything longer.
 Use `varchar(254)` for an email address. Use 320 only with a very good reason.
 
 Because: 320 is the RFC maximum, but 254 is the practical limit that mail servers along the way enforce.
+
+Agent: when a migration or model adds a column for an email address, use `varchar(254)`; use 320 only with a very good reason. Reason: 320 is the RFC maximum, but 254 is the practical limit that mail servers along the way enforce.
 
 ---
 
@@ -302,6 +344,8 @@ Because: no standard limits the length of a URL, but around 2,000 characters wor
 
 Good: `varchar(2048)` for an image URL
 Bad:  `text`, or `varchar(65535)` for a URL
+
+Agent: when a migration or model adds a column that holds a URL, use `varchar(2048)`, or a smaller limit when the URL comes from something known and controlled; go longer only with a good reason, and never use `text` or `varchar(65535)`. Reason: about 2,000 characters works in virtually any browser, server, and search tooling, and the sitemap protocol caps URLs at 2,048.
 
 ---
 
@@ -321,6 +365,8 @@ Because: the database should enforce what is true about the data. For a document
 
 Second opinion: DBA or Data Architect.
 
+Agent: when a migration or model adds a column that may have no honest upper limit, such as extracted document text or a raw vendor response, decide on purpose where the limit lives. Ask in order: is the length a fact about the data or a choice someone should make (a choice gets a limit); will the data reach the warehouse (if not, the data teams must be told the table is never to be ported); can it be cut at 65,535 characters; and if it must arrive whole and cannot be cut, that is a Data Architect task. Reason: the database should enforce what is true about the data.
+
 ---
 
 ### Never store a list of values as one delimited string
@@ -332,6 +378,8 @@ Because: a delimited string only works while every value avoids the delimiter an
 
 Good: `emails` as a `varchar(254)[]`, or a table of emails
 Bad:  `emails varchar(500)` holding `a@example.com,b@example.com`
+
+Agent: when a migration or model adds a text or varchar column that holds several values in one delimited string, use an array column or a second table instead; an array such as `varchar(254)[]` keeps the varchar limit on each element. Reason: a delimited string only works while every value avoids the delimiter and every reader splits it the same way, and nothing in the database enforces either.
 
 ---
 
@@ -349,6 +397,8 @@ Because: a column left open collects whatever anyone writes into it, and every r
 Good: a `status` column limited to `draft`, `hold`, and `confirmed`
 Bad:  a `status` column with no limit, holding `confirmed`, `Confirmed`, `CONFIRMED`, and `conf`
 
+Agent: when a migration or model adds a short text column, ask whether it holds one of a known set of values; if it does or might, treat it as constrained and say so in the design, and leave it open only for a stated reason. A column named `status`, `type`, `kind`, `mode`, or `category`, or one that names a strategy or a method, likely hides a fixed set. Reason: an open column collects whatever anyone writes into it, and every reader downstream has to cope with the variations.
+
 ---
 
 ### Have the database enforce a fixed set of values
@@ -357,6 +407,8 @@ Bad:  a `status` column with no limit, holding `confirmed`, `Confirmed`, `CONFIR
 When a column holds one of a fixed set of values, the database enforces the set. A check in application code alone does not count, because anything that writes to the table without going through that code can still write a value outside the set.
 
 Because: a limit kept in application code is an opinion. A limit in the database is true for every writer.
+
+Agent: when a column holds one of a fixed set of values, enforce the set in the database; a check in application code alone does not count. Reason: a limit kept in application code is an opinion, and a limit in the database is true for every writer.
 
 ---
 
@@ -415,6 +467,8 @@ The check constraint and the enum cost different things. A check constraint leav
 
 For a column that has three states only because one of them means unknown, see the nullable boolean rule under Nullability.
 
+Agent: when a migration or model enforces a fixed set of values, choose the mechanism by asking whether each value carries anything with it, such as a display label, sort order, active flag, or description. Use a lookup table with a foreign key when values carry something or the set will expand regularly. Use a check constraint on a varchar, or an enum, when each value is only a string and the set rarely changes; an enum costs more to change, since a value cannot be dropped and moving a column onto one rewrites the table.
+
 ---
 
 ## Currency
@@ -436,6 +490,8 @@ Bad:  `currency`, `ccy`, or `curr_cd` for a column that holds the code
 
 Because: the name is how copies of the standard major-unit block are found later. The block reads the code column by this name, and the currency runbook searches for it, so a column that holds a currency code under any other name is the one that gets missed when a currency changes.
 
+Agent: when a migration or model adds a column that holds a currency code, name it `currency_code` exactly, make it `varchar(3)`, and store the uppercase ISO-4217 code (`USD`, `EUR`). Use one `currency_code` per row for all its amounts, because a second currency column on a row that holds one currency stores one fact several times. Only where a row really spans currencies, name each column for its role (`charged_currency_code`, `settlement_currency_code`). Reason: the standard major-unit block and the currency runbook find currency codes by this name.
+
 ---
 
 ### Never store money in float, real, or double
@@ -444,6 +500,8 @@ Because: the name is how copies of the standard major-unit block are found later
 Because: binary floating point cannot represent most decimal amounts exactly, so totals drift. Each error is tiny, but they stack when amounts are added together, and a report can end up off by a few cents with no one able to say where.
 
 Storing an amount only to display it is not an exception in practice. A value kept for display tends to be summed, exported, or reported on later, and by then the float is already in the pipeline. A value that really is display-only, and will stay so, carries little risk, and as with any Rule it can be crossed with a strong reason written down. Be suspicious of the claim that it will stay display-only.
+
+Agent: never store money in `float`, `real`, or `double`. A value kept for display tends to be summed, exported, or reported on later, so be suspicious of a claim that it will stay display-only; crossing this rule needs a strong written reason. Reason: binary floating point cannot represent most decimal amounts exactly, so totals drift.
 
 ---
 
@@ -454,6 +512,8 @@ Store an amount as a count of the currency's smallest unit in a `bigint`. In US 
 
 Why not `numeric`, which is exact? Nothing is wrong with it, and it is what the derived major-unit column below uses. The case against it as the stored form is scale. A `numeric` column has to be given a number of decimal places, and the right number depends on the currency: none for yen, three for the Kuwaiti dinar. One scale cannot be right for every currency. A count of minor units in a `bigint` needs no scale, stays exact in every tool and language, and has no decimal type for anything downstream to mishandle. Using `numeric` instead is a deviation from this Default, and it needs a reason written down like any other.
 
+Agent: when a migration or model adds an amount of money, store it as a count of the currency's smallest unit in a `bigint` (5.00 US dollars is 500; a currency with no minor unit, like yen, stores 10,000 yen as 10000). Using `numeric` as the stored form is a deviation and needs a written reason. Reason: `numeric` needs a scale, and the right number of decimal places depends on the currency, none for yen and three for the Kuwaiti dinar.
+
 ---
 
 ### Name each money column for what it holds, ending in `_minor_units`
@@ -461,12 +521,16 @@ Why not `numeric`, which is exact? Nothing is wrong with it, and it is what the 
 
 A single amount is `amount_minor_units`. Where a table stores several, name each and end it in `_minor_units`: `base_price_minor_units`, `service_charge_minor_units`.
 
+Agent: when a migration or model adds a money column, name it for what it holds and end it in `_minor_units`: a single amount is `amount_minor_units`, and several are `base_price_minor_units`, `service_charge_minor_units`.
+
 ---
 
 ### Derive major units from minor units instead of storing a second copy
 [Slug: derive-major-from-minor · Temperature: Default · Origin: general · Scope: column · Why: currency-major-units]
 
 When dollars, euros, and the like are needed, calculate them from the minor-unit column. The type is `numeric(23,4)`, or `decimal(23,4)` in Redshift. Store a major-unit column directly only when the value needs fractions of a minor unit, like half a cent.
+
+Agent: when a migration or model needs dollars, euros, or other major units, calculate them from the minor-unit column as `numeric(23,4)` (`decimal(23,4)` in Redshift) instead of storing a second copy. Store a major-unit column directly only when the value needs fractions of a minor unit, like half a cent.
 
 ---
 
@@ -481,6 +545,8 @@ Good: the standard block below
 Bad:  `amount_minor_units / 100` for every currency
 
 Story: `major-units-by-paste`.
+
+Agent: never turn minor units into major units with a flat divide by 100; use the standard block (`major-units-standard-block`). Reason: the number of decimal places is a property of the currency: most use two, a few use none (yen), some use three (Kuwaiti dinar), and two use four.
 
 ---
 
@@ -509,6 +575,8 @@ A shared function that holds the lists is the alternative when a database has ma
 
 A separate [runbook](../runbook/currency_runbook.md), outside these standards, covers what to do if a new or changed currency means the block has to change. Nobody watches for ISO changes on a schedule, so whoever learns of one should tell the data architect.
 
+Agent: when a migration or model adds a generated major-unit column, copy the standard block from the full rule (`major-units-standard-block`) exactly as written and change only the column names, so every copy can be found and compared. A currency not on the block's list is treated as two decimal places, and a change to a currency's decimal places means every copy must be found and updated (see the currency runbook). Reason: identical copies can all be found and compared.
+
 ---
 
 ## Values the database maintains
@@ -529,6 +597,8 @@ Because: a derived value that code keeps in step is only as reliable as every ru
 Good: `total_minor_units bigint GENERATED ALWAYS AS (base_price_minor_units + service_charge_minor_units) STORED`
 Bad:  application code adds the two values and writes the total
 
+Agent: when a migration or model adds a column whose value can be worked out from other columns in the same row, make it a generated column and not application code. A generated column can use only columns of its own row; if the value needs other tables, or must be computed when read, use a view instead (`no-second-copy-use-a-view`, `plain-view-before-materialized`). A value that depends on how the row changed cannot be generated (`trigger-for-change-dependent-value`). Reason: a derived value that code keeps in step is only as reliable as every run of that code.
+
 ---
 
 ### When a value depends on how a row changed, let a trigger maintain it
@@ -540,6 +610,8 @@ Because: a trigger maintains the value for every writer, whichever application o
 
 Good: a trigger that sets `updated_at` on every real change
 Bad:  every piece of application code that writes the row setting `updated_at` itself
+
+Agent: when a migration or model adds a value that depends on when or how a row changed, and not on its other columns, let a trigger maintain it rather than application code; a generated column cannot, because its formula must give the same answer every time. The shared `updated_at` trigger is the worked example (`shared-updated-at-trigger`). A different value gets a function of its own in the same shape, named by `trg-trigger-names` and `ufn-function-names`. Reason: a trigger maintains the value for every writer.
 
 ---
 

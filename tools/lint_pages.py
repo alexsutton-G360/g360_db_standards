@@ -13,8 +13,10 @@ ERRORS (fail the check)
   - a slug, why key, story or principle listed in slugs.lock that has disappeared
   - an em dash or en dash anywhere in page text
   - a relative markdown link that points at a file that is not there
+  - a rule with more than one Agent: line, or an empty one
 
 WARNINGS (reported, do not fail)
+  - rules with no Agent: line yet (one summary line), and an Agent: line over 600 characters
   - singular first person (I, my, me) in rule or story text. The Index may quote the reader.
   - an HTML comment other than the stage-one marker. Editorial notes belong in pull requests.
   - a slug or why key that is new and not yet in slugs.lock
@@ -36,7 +38,8 @@ PAGES = ROOT / "pages"
 LOCK = ROOT / "slugs.lock"
 SCOPES = {"global", "column", "table", "database", "schema", "constraint", "index", "trigger",
           "function", "procedure", "view", "materialized_view", "role", "user"}
-TEXT_FILES = sorted(PAGES.glob("*.md")) + sorted((ROOT / "runbook").glob("*.md"))
+AGENT_MAX_CHARS = 600
+TEXT_FILES =sorted(PAGES.glob("*.md")) + sorted((ROOT / "runbook").glob("*.md"))
 
 errors, warnings = [], []
 
@@ -81,6 +84,20 @@ def main():
         for t in s["serves"]:
             if t not in why_keys and t not in prin_slugs:
                 errors.append(f"story {s['slug']} serves '{t}', which is not a why key or principle")
+
+    # Agent lines: the one-sentence form an agent is given. "Agent: none" leaves a rule out on purpose.
+    for r in rules:
+        if ca.AGENT_LINE.search(r["full"]):
+            errors.append(f"{r['slug']}: more than one Agent: line")
+        a = r["agent"]
+        if a is not None and not a:
+            errors.append(f"{r['slug']}: empty Agent: line (write the rule, or 'Agent: none')")
+        elif a and a != ca.AGENT_NONE and len(a) > AGENT_MAX_CHARS:
+            warnings.append(f"{r['slug']}: Agent: line is {len(a)} characters (over {AGENT_MAX_CHARS}); the agent form should be short")
+    missing = [r["slug"] for r in rules if r["agent"] is None]
+    if missing:
+        warnings.append(f"{len(missing)} of {len(rules)} rules have no Agent: line yet "
+                        f"(add one, or 'Agent: none' to leave a rule out on purpose)")
 
     # slug lock
     current = dict(rule_slugs=sorted(slugs), why_keys=sorted(why_keys),

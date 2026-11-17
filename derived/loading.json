@@ -320,5 +320,6 @@
       "groups/other_objects--keys-constraints-and-indexes.md",
       "groups/other_objects--roles-and-users.md"
     ]
-  }
+  },
+  "guide": "AGENT_GUIDE.md"
 }

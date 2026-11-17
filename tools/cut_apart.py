@@ -71,7 +71,9 @@ STORY_HEAD = re.compile(r"^### ([^\n]+)\n\*slug: ([a-z0-9-]+)(?: · serves: ([^*
 RULE_CITE = re.compile(r"\*rule: ([a-z0-9-]+)\*")
 STORY_CITE = re.compile(r"\*story: ([a-z0-9-]+)\*|Story: `([a-z0-9-]+)`")
 FENCE = re.compile(r"```.*?```", re.S)
-LABELS = ("Because:", "Good:", "Bad:", "Second opinion:", "Story:", "Stories:")
+LABELS = ("Because:", "Good:", "Bad:", "Second opinion:", "Story:", "Stories:", "Agent:")
+AGENT_LINE = re.compile(r"^Agent:[ \t]*(.*)$", re.M)
+AGENT_NONE = "none"                                 # "Agent: none" marks a rule left out of the agent set on purpose
 
 
 def mask_fences(text):
@@ -124,6 +126,17 @@ def chunks(body):
     return out
 
 
+def take_agent(full):
+    """Pull the one-line "Agent:" form out of a rule body. Returns (agent_or_None, body_without_it).
+    The line is for the agent-side build only, so it never reaches the neutral derived rule text.
+    agent is None when the rule has no Agent line; AGENT_NONE when the rule is left out on purpose."""
+    m = AGENT_LINE.search(full)
+    if not m:
+        return None, full
+    rest = (full[:m.start()] + full[m.end():]).replace("\n\n\n", "\n\n")
+    return m.group(1).strip(), clean_body(rest)
+
+
 def brisk_form(body):
     """Return (brisk_text, full_text, has_marker). With no marker, stage one is the full text."""
     if SENTINEL not in body:
@@ -160,13 +173,14 @@ def parse_page(name, text):
                 m = TAG.match(seg)
                 if m:
                     full = unmask(clean_body(seg[m.end():]), blocks)
+                    agent, full = take_agent(full)
                     brisk, full, marked = brisk_form(full)
                     second = next((l[len("Second opinion:"):].strip() for l in full.split("\n")
                                    if l.startswith("Second opinion:")), None)
                     rules.append(dict(page=name, group=page_group, title=m.group(1), slug=m.group(2),
                                       temperature=m.group(3), origin=m.group(4), scope=m.group(5),
                                       why=m.group(6), full=full, brisk=brisk, marked=marked,
-                                      second_opinion=second))
+                                      second_opinion=second, agent=agent))
             continue
         if group == "Stories":
             for m in STORY_HEAD.finditer(body):
@@ -191,13 +205,14 @@ def parse_page(name, text):
             m = TAG.match(seg)
             if m:
                 full = unmask(clean_body(seg[m.end():]), blocks)
+                agent, full = take_agent(full)
                 brisk, full, marked = brisk_form(full)
                 second = next((l[len("Second opinion:"):].strip() for l in full.split("\n")
                                if l.startswith("Second opinion:")), None)
                 rules.append(dict(page=name, group=group, title=m.group(1), slug=m.group(2),
                                   temperature=m.group(3), origin=m.group(4), scope=m.group(5),
                                   why=m.group(6), full=full, brisk=brisk, marked=marked,
-                                  second_opinion=second))
+                                  second_opinion=second, agent=agent))
             else:
                 head, _, rest = seg.partition("\n")
                 refs.append(dict(page=name, group=group, title=head.replace("### ", "").strip(),
@@ -357,6 +372,7 @@ def main():
                                   "why", "second_opinion", "cites_rules", "cites_stories", "stories",
                                   "has_companion")}
                | dict(words_full=words(r["full"]), words_brisk=words(r["brisk"]),
+                      agent=r["agent"],
                       brisk_file=f"rules/{r['slug']}.md",
                       companion_file=f"companions/{r['slug']}.md" if r["has_companion"] else None)
                for r in rules],
