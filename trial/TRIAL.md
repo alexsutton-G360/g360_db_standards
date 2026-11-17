@@ -39,6 +39,14 @@ Type `/review`. It diffs `main` against the branch and launches every agent whos
    happening, which is the thing we most want to know.
 5. **Verdict.** `/review` prints `Needs discussion`, not `Needs changes`.
 
+## 4b. Check what the database agent actually read
+
+After the review finishes, run this in any terminal. It lists every rule and companion file that was opened.
+The seven `db_*_conventions.md` files and `db_usage_conventions.md` should each appear, and so should the
+`examples/db_standards/` files for any finding that carries a story or is a Judgment call.
+
+    grep -rhoE '"file_path": ?"[^"]*(\.claude/(rules|examples)/)[^"]*"' ~/.claude/projects/*sample*service* | sed 's/.*\.claude\///' | sort | uniq -c | sort -rn
+
 ## 5. Report back
 
 Paste the full `/review` output to me, or tell me which of the five checks failed. If all five pass, the

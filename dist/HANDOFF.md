@@ -24,15 +24,15 @@ fixed sections were copied from. Then run `node .claude/scripts/check-claude.mjs
 
 ## The rules
 
-No rule is left out. Together the rule files come to about 41 KB, about 10k tokens if all of them load.
+No rule is left out. Together the rule files come to about 42 KB, about 10k tokens if all of them load.
 
 | File | Acronym | Rules | Codes | Size |
 |---|---|---|---|---|
-| `db_naming_conventions.md` | `RDBNM` | 9 | RDBNM1 to RDBNM9 | 4.3 KB |
-| `db_identifier_conventions.md` | `RDBID` | 10 | RDBID1 to RDBID10 | 5.7 KB |
-| `db_column_conventions.md` | `RDBCL` | 19 | RDBCL1 to RDBCL19 | 10.0 KB |
-| `db_currency_conventions.md` | `RDBCY` | 7 | RDBCY1 to RDBCY7 | 3.7 KB |
-| `db_table_conventions.md` | `RDBTB` | 7 | RDBTB1 to RDBTB7 | 4.8 KB |
+| `db_naming_conventions.md` | `RDBNM` | 9 | RDBNM1 to RDBNM9 | 4.4 KB |
+| `db_identifier_conventions.md` | `RDBID` | 10 | RDBID1 to RDBID10 | 5.9 KB |
+| `db_column_conventions.md` | `RDBCL` | 19 | RDBCL1 to RDBCL19 | 10.4 KB |
+| `db_currency_conventions.md` | `RDBCY` | 7 | RDBCY1 to RDBCY7 | 3.9 KB |
+| `db_table_conventions.md` | `RDBTB` | 7 | RDBTB1 to RDBTB7 | 4.9 KB |
 | `db_relationship_conventions.md` | `RDBRL` | 7 | RDBRL1 to RDBRL7 | 5.0 KB |
 | `db_object_conventions.md` | `RDBOB` | 14 | RDBOB1 to RDBOB14 | 7.0 KB |
 

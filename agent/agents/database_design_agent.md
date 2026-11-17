@@ -37,7 +37,7 @@ Every finding from this agent has the recommendation `discuss`, so nothing is ev
 
 ## Companions
 
-Each rule line ends with the path of its companion: the full rule and the stories behind it. Before reporting a finding on a Judgment-call rule, or on a rule the author has departed from, read the companion, and say in the finding what the rule protects, naming the story by its slug when the companion has one (RDBUS6). When a rule line carries a `Second opinion:` role, say in the finding that the author should consult that role, and never contact them or settle the question for them (RDBUS4). For a Judgment call, put the rule's questions to the author in order and do not pick an answer (RDBUS5).
+Each rule line ends with the path of its companion: the full rule and the stories behind it. Some lines also carry `story: <slug>`, which means a story exists. Read the companion with the Read tool, before you write the finding, in all of these cases: the line carries `story:`, the line is tagged `Judgment call`, or the author has departed from the rule. A finding that falls under one of these without a companion Read is incomplete. In the finding, say what the rule protects, naming the story by its slug when the line has one (RDBUS6). When a rule line carries a `Second opinion:` role, say in the finding that the author should consult that role, and never contact them or settle the question for them (RDBUS4). For a Judgment call, put the rule's questions to the author in order and do not pick an answer (RDBUS5).
 
 {{SECTIONS}}
 

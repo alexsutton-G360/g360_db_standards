@@ -11,7 +11,7 @@ Approved short forms for names are listed in .claude/examples/db_standards/appro
 
 ## Global Rules
 
-RDBNM1: when a change names any database object, use lowercase only, with no capital letters. Reason: Postgres folds unquoted names to lowercase, so a name with capitals has to be wrapped in double quotes every time anyone refers to it. [Rule; slug: lowercase-every-name; full rule: .claude/examples/db_standards/lowercase-every-name.md]
+RDBNM1: when a change names any database object, use lowercase only, with no capital letters. Reason: Postgres folds unquoted names to lowercase, so a name with capitals has to be wrapped in double quotes every time anyone refers to it. [Rule; slug: lowercase-every-name; story: shape-sorter; full rule: .claude/examples/db_standards/lowercase-every-name.md]
 
 RDBNM2: when a change names any database object, put an underscore between the words of the name and never at its start or end; schema names are the exception, since they allow no underscores at all. Reason: a leading underscore means something elsewhere, like private names in Python, but nothing in our tables, and Postgres names the array type of every table with a leading underscore, so a table named that way can collide with one. [Rule; slug: underscores-between-words; full rule: .claude/examples/db_standards/underscores-between-words.md]
 
@@ -21,9 +21,9 @@ RDBNM4: when a change names any database object, choose clear, commonly accepted
 
 ## Naming
 
-RDBNM5: when a migration or model names a column, name it for the fact it stores, not the action it asks for (`excluded_properties`, not `exclude_properties`). A table that really holds instructions, such as jobs to run, is the exception. Reason: a table records what is true about a row, not instructions for what to do with it. [Default; slug: name-column-for-the-fact; full rule: .claude/examples/db_standards/name-column-for-the-fact.md]
+RDBNM5: when a migration or model names a column, name it for the fact it stores, not the action it asks for (`excluded_properties`, not `exclude_properties`). A table that really holds instructions, such as jobs to run, is the exception. Reason: a table records what is true about a row, not instructions for what to do with it. [Default; slug: name-column-for-the-fact; story: table-of-facts; full rule: .claude/examples/db_standards/name-column-for-the-fact.md]
 
-RDBNM6: when a migration or model names a flag column, name it for what is true, not for what is not (`is_active`, not `is_not_active`). This bends when another name reads more clearly; see the story `hidden-vs-displayed`. Reason: code that tests a negated name reads as a double negative. [Default; slug: columns-in-positive-voice; full rule: .claude/examples/db_standards/columns-in-positive-voice.md]
+RDBNM6: when a migration or model names a flag column, name it for what is true, not for what is not (`is_active`, not `is_not_active`). This bends when another name reads more clearly; see the story `hidden-vs-displayed`. Reason: code that tests a negated name reads as a double negative. [Default; slug: columns-in-positive-voice; story: hidden-vs-displayed; full rule: .claude/examples/db_standards/columns-in-positive-voice.md]
 
 RDBNM7: when a migration or model names a column, use the singular (`first_name`, `user_guid`); a column that really holds many values, like an array, can be plural. Reason: a row is one instance of what its plural-named table holds, so its properties are singular. [Default; slug: columns-in-singular; full rule: .claude/examples/db_standards/columns-in-singular.md]
 

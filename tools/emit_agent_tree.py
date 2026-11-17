@@ -183,7 +183,7 @@ def companion_text(r, code, bundle_file, tmp):
     return LOCAL_LINK.sub(r"\1", text)
 
 
-def render_bundle(b, rules, codes, cfg):
+def render_bundle(b, rules, codes, cfg, stories):
     comp_dir = cfg["output"]["companions_dir"]
     notice = cfg["output"]["generated_notice"]
     lines = ["---", f"description: {b['description']}",
@@ -198,7 +198,8 @@ def render_bundle(b, rules, codes, cfg):
             seen_groups.append(r["group"])
             lines += [f"## {r['group']}", ""]
         so = f" Second opinion: {sentence(r['second_opinion'])}" if r["second_opinion"] else ""
-        tail = f"[{r['temperature']}; slug: {r['slug']}; full rule: {comp_dir}/{r['slug']}.md]"
+        story = f"; story: {', '.join(stories[r['slug']])}" if stories.get(r["slug"]) else ""
+        tail = f"[{r['temperature']}; slug: {r['slug']}{story}; full rule: {comp_dir}/{r['slug']}.md]"
         line = f"{codes[r['slug']]}: {sentence(r['agent'])}{so} {tail}"
         if "\n" in line or not RULE_LINE.match(line):
             die(f"bad rule line for {r['slug']}")
@@ -257,8 +258,11 @@ def render_agent(cfg, bundled, codes, target):
     read_first = [f"- `.claude/rules/{b['file']}`" for b in bundles]
     read_first.append(f"- `.claude/rules/{Path(cfg['agent']['usage_rules']).name}`")
     read_first.append("- `.claude/rules/suppression_conventions.md`")
-    read_first += ["", "If a rule's reasoning is not enough to judge a boundary case, follow the path at the end of its "
-                       "line to the companion for that rule before deciding."]
+    read_first += ["", "Open every file above with its own Read call, in full, before you report any finding. Do not use "
+                       "`cat`, `head`, `grep`, or a summary in place of reading them, and do not rely on rules that "
+                       "arrived through the rule-injection hook, because the hook injects each file only once per "
+                       "session and may already have spent it on another agent. The review is incomplete if any file "
+                       "above went unread."]
     sections = []
     for b in bundles:
         rs = bundled[b["acronym"]]
@@ -402,6 +406,8 @@ def main():
         if res.returncode != 0:
             die("cut_apart.py failed:\n" + res.stdout + res.stderr)
 
+        manifest = json.loads((tmp / "manifest.json").read_text())
+        stories = {r["slug"]: r.get("stories", []) for r in manifest["rules"]}
         if out.exists():
             shutil.rmtree(out)
         rules_dir = out / ".claude" / "rules"
@@ -412,7 +418,7 @@ def main():
         sizes = {}
         file_of = {}
         for b in cfg["bundle"]:
-            text = render_bundle(b, bundled[b["acronym"]], codes, cfg)
+            text = render_bundle(b, bundled[b["acronym"]], codes, cfg, stories)
             (rules_dir / b["file"]).write_text(text)
             sizes[b["file"]] = len(text.encode())
             for r in bundled[b["acronym"]]:
