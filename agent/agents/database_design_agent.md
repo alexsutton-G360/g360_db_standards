@@ -1,6 +1,8 @@
 ---
 name: database-design-agent
 description: Database design review enforcing the Groups360 database standards in db_*_conventions.md (RDB family): naming, identifiers, columns, currency, tables, relationships and indexes, and database objects. Every rule is a guideline the author may bend for a stated reason. Invoke when any file under migrations/ or the data models under the service package changes.
+model: opus
+effort: high
 tools:
   - Read
   - Grep
