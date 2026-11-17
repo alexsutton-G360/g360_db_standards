@@ -17,7 +17,9 @@ Nothing existing is overwritten. Every file is new.
 
 ## How to install
 
-Unzip `dist.zip` at the root of the guidance repository. Everything lands under `.claude/`, next to the
+Unzip `dist.zip` at the root of the guidance repository. **Almost everything is inside a hidden `.claude/` folder, so
+Finder and most zip previews show only `HANDOFF.md`.** To see the rest, run `unzip -l dist.zip`, or press
+`Cmd+Shift+.` in Finder. Everything lands under `.claude/`, next to the
 existing rules and agents, and no existing file is replaced. `HANDOFF.md` and `.generated` also land at the root;
 this note can be deleted once read, and `.generated` records which commit of your repository the agent's
 fixed sections were copied from. Then run `node .claude/scripts/check-claude.mjs` as usual.
