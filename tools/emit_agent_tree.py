@@ -307,6 +307,13 @@ and handed over again.
 
 Nothing existing is overwritten. Every file is new.
 
+## How to install
+
+Unzip `dist.zip` at the root of the guidance repository. Everything lands under `.claude/`, next to the
+existing rules and agents, and no existing file is replaced. `HANDOFF.md` and `.generated` also land at the root;
+this note can be deleted once read, and `.generated` records which commit of your repository the agent's
+fixed sections were copied from. Then run `node .claude/scripts/check-claude.mjs` as usual.
+
 ## The rules
 
 {skipped_note} Together the rule files come to about {total / 1024:.0f} KB, about {total // 4000}k tokens if all of them load.
@@ -448,7 +455,7 @@ def main():
     if args.zip:
         base = out.parent / out.name
         shutil.make_archive(str(base), "zip", root_dir=out)
-        print(f"wrote {base}.zip (hand this file over; unzip it at the root of a service checkout's guidance folder)")
+        print(f"wrote {base}.zip (hand this file over)")
 
 
 if __name__ == "__main__":

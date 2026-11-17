@@ -49,8 +49,8 @@ Open:
 - [ ] **See the reasons.** A scanner that reads a service checkout and lists every `claude-allow: RDB...` reason by rule, so the data architect can see which guidelines get bent and why. The target only warns its own rule-review agent when one rule passes 10 markers.
 - [ ] **Concern files and their codes.** Group the 20 page groups into 8 to 10 concern files of 3 to 15 KB each, and choose the two letters after `RDB` for each. Their largest existing file is 24 KB, and a whole file loads at once. Proposed: naming (`RDBNM`), identifiers (`RDBID`), columns (`RDBCL`), currency (`RDBCY`), tables (`RDBTB`), relationships and indexes (`RDBRL`), other objects (`RDBOB`), and the usage file (`RDBUS`).
 - [ ] **Agent.** A new database design agent that owns the family, beside the existing migration agent, which keeps migration mechanics. Recommended over extending the migration agent.
-- [ ] **Origin.** Decide whether `house` and `general` appear in the rule line or stay wiki-only.
-- [ ] **Numbering gaps.** The target's authoring rules are silent on whether a retired line may leave a gap. Ask, then record the answer.
+- [x] **Origin.** Wiki-only. A rule line carries Temperature, slug and companion path, not Origin.
+- [x] **Numbering gaps.** A retired rule's code stays reserved in `codes.lock` and is never reused, so gaps are expected.
 - [ ] **Generated header.** Which header marks a generated file, so their review agents leave it alone.
 
 Done when: each decision is written into the control file or `CLAUDE.md`, whichever it belongs in.

@@ -15,6 +15,13 @@ and handed over again.
 
 Nothing existing is overwritten. Every file is new.
 
+## How to install
+
+Unzip `dist.zip` at the root of the guidance repository. Everything lands under `.claude/`, next to the
+existing rules and agents, and no existing file is replaced. `HANDOFF.md` and `.generated` also land at the root;
+this note can be deleted once read, and `.generated` records which commit of your repository the agent's
+fixed sections were copied from. Then run `node .claude/scripts/check-claude.mjs` as usual.
+
 ## The rules
 
 No rule is left out. Together the rule files come to about 41 KB, about 10k tokens if all of them load.
