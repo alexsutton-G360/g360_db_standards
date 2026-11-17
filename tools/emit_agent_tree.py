@@ -359,7 +359,12 @@ are recorded in `codes.lock` in the standards repository and are never reused or
 9. **Overlap with `code-reviewer`.** In a trial review, `code-reviewer` reported floating-point money and naive
    timestamps independently of our agent, so each was reported two or three times. Our rule codes make the
    duplicates easy to spot, but the orchestrator does not merge them.
-10. **The generated notice** at the top of each bundle is our wording. If you use a standard header for generated
+10. **Constraint name prefixes.** `RMIG19` asks for a project-wide naming convention but names no prefixes. In a trial
+   review, `data-migration-agent` told the author to rename `ctx_notes_guid_unique` to `uq_notes_guid`, which
+   contradicts `RDBOB6` (`ctx_` for check, unique, and exclusion constraints). The `uq_` prefix appears nowhere in
+   your repository. We suggest `RMIG19` point at `RDBOB5` to `RDBOB7` for the prefixes, and that the migration agent
+   defer to them.
+11. **The generated notice** at the top of each bundle is our wording. If you use a standard header for generated
    files, tell us and we will switch.
 
 ## How these were checked

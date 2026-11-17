@@ -32,3 +32,11 @@ adds it and rerun.
 Other agents in the fleet reported the same float price and naive timestamp. The verdict was `Needs changes`
 because of `RLAY8`, `RMIG18` and `RMIG25`/`RMIG28` findings, none of them ours. Every database-design finding
 was `discuss`.
+
+Run 2 review detail: the database-design findings named stories (major-units-by-paste, which-clock-was-that,
+labels-on-the-bags, the text-field story, the contact-list story), asked Judgment-call questions without picking
+answers, and all were `discuss`. The agent took 4m31s, against 1m11s before the fixes, so the full reads cost
+time: total review wall time rose from about 4 minutes to 6.
+
+Conflict found: `data-migration-agent` recommended renaming a `ctx_` constraint to `uq_`, which `RDBOB6` forbids.
+`RMIG19` names no prefixes and `uq_` appears nowhere in the guidance repository. Added to the handoff note.
