@@ -98,6 +98,7 @@ This list is a reference, not a rule. It records which short forms Groups360 has
 | Service level agreement | `sla` |
 | Single sign-on | `sso` |
 | Organization | `org` |
+| Average | `avg` |
 
 `dev` means development, not developer. On a name it usually marks something used in a lower environment, during development. `org` means organization. It is so common in our systems that anyone who sees it reads it that way.
 
@@ -114,3 +115,4 @@ This list is a reference, not a rule. It records which short forms Groups360 has
 | Salesforce | `sf` |
 | Property management system | `pms` |
 | Central reservation system | `crs` |
+| Square feet | `sqft` |
