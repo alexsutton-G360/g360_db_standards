@@ -47,7 +47,8 @@
     ],
     "constraint": [
       "rules/pk-and-fk-names.md",
-      "rules/ctx-constraint-names.md"
+      "rules/ctx-constraint-names.md",
+      "rules/shorten-long-constraint-names.md"
     ],
     "database": [
       "rules/database-name-form.md"
@@ -177,6 +178,7 @@
       "rules/pk-and-fk-names.md",
       "rules/ctx-constraint-names.md",
       "rules/idx-index-names.md",
+      "rules/shorten-long-constraint-names.md",
       "rules/trg-trigger-names.md",
       "rules/ufn-function-names.md",
       "rules/usp-procedure-names.md",
@@ -287,7 +289,8 @@
     "other_objects:Keys, constraints, and indexes": [
       "rules/pk-and-fk-names.md",
       "rules/ctx-constraint-names.md",
-      "rules/idx-index-names.md"
+      "rules/idx-index-names.md",
+      "rules/shorten-long-constraint-names.md"
     ],
     "other_objects:Roles and users": [
       "rules/role-no-login.md",

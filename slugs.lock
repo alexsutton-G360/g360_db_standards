@@ -57,6 +57,7 @@
     "schema-never-named-for-database",
     "shared-updated-at-trigger",
     "short-text-is-a-fixed-set",
+    "shorten-long-constraint-names",
     "smallest-honest-varchar-limit",
     "soft-delete-default",
     "source-type-id-pattern",

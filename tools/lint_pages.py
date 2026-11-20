@@ -62,6 +62,25 @@ def main():
         if name != "global_rules":
             errors.append(f"{name}: heading '{f['title']}' is not a rule (no valid tag line) and not a story")
 
+    # the short-forms table: savings are right, sorted, and no short form repeats or shadows an approved one
+    gtext = (PAGES / "global_rules.md").read_text()
+    sf = re.search(r"### Short forms for names at the limit\n(.*?)(?=\n### |\n## |\Z)", gtext, re.S)
+    if sf:
+        rows = re.findall(r"^\| ([a-z]+) \| `([a-z]+)` \| (\d+) \|$", sf.group(1), re.M)
+        before = gtext.split("### Short forms for names at the limit")[0]
+        approved = {x.strip() for a in re.findall(r"\| [^|]+ \| `([a-z/ ]+)` \|", before) for x in a.split("/")}
+        seen = set()
+        for word, short, saves in rows:
+            if len(word) - len(short) != int(saves):
+                errors.append(f"short forms: '{word}' to '{short}' saves {len(word) - len(short)}, not {saves}")
+            if short in seen or short in approved:
+                errors.append(f"short forms: '{short}' is used twice or is already an approved acronym")
+            seen.add(short)
+        if not rows:
+            errors.append("short forms: table has no rows")
+        elif [int(r[2]) for r in rows] != sorted((int(r[2]) for r in rows), reverse=True):
+            errors.append("short forms: rows must be sorted by savings, largest first")
+
     slugs = [r["slug"] for r in rules]
     why_keys = {r["why"] for r in rules}
     story_slugs = {s["slug"] for s in stories}

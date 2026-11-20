@@ -1,18 +1,18 @@
 # Cut-apart report
 
-Rules: 73 | stories: 20 | principles: 5 | reference files: 1 | group intros written: 11
+Rules: 74 | stories: 20 | principles: 5 | reference files: 1 | group intros written: 11
 
-Words: full rule text 10618, stage one 10618 (100% of full). Rules with a cut point (<!-- brisk-end -->): 0 of 73.
+Words: full rule text 11002, stage one 11002 (100% of full). Rules with a cut point (<!-- brisk-end -->): 0 of 74.
 
 ## Words by scope (what loading that scope would inject)
 
 | scope | rules | stage one words | full words |
 |---|---|---|---|
 | column | 36 | 4853 | 4853 |
-| constraint | 2 | 202 | 202 |
+| constraint | 3 | 511 | 511 |
 | database | 1 | 70 | 70 |
 | function | 1 | 53 | 53 |
-| global | 4 | 243 | 243 |
+| global | 4 | 318 | 318 |
 | index | 1 | 67 | 67 |
 | materialized_view | 1 | 64 | 64 |
 | procedure | 1 | 54 | 54 |
@@ -27,7 +27,7 @@ Words: full rule text 10618, stage one 10618 (100% of full). Rules with a cut po
 
 - no problems: slugs unique and distinct from why keys, stories and principles; every citation and every story target resolves
 
-## Trim candidates: unmarked rules over 120 words (36)
+## Trim candidates: unmarked rules over 120 words (38)
 
 These are injected in full until someone places a cut point. Each one needs a judgment about where
 the statement ends and the elaboration begins.
@@ -37,6 +37,7 @@ the statement ends and the elaboration begins.
 - `source-type-id-pattern` (365 words)
 - `not-null-until-null-has-meaning` (339 words)
 - `exclusive-arc-default` (308 words)
+- `shorten-long-constraint-names` (307 words)
 - `same-database-pointer-needs-fk` (306 words)
 - `index-when-a-lookup-exists` (267 words)
 - `junction-table-per-parent` (265 words)
@@ -64,14 +65,15 @@ the statement ends and the elaboration begins.
 - `url-varchar-2048` (142 words)
 - `no-delimited-list-strings` (142 words)
 - `name-junction-tables-for-both-sides` (140 words)
-- `pk-and-fk-names` (135 words)
+- `pk-and-fk-names` (137 words)
+- `spell-out-names-approved-acronyms` (136 words)
 - `schema-never-named-for-database` (134 words)
 - `by-column-when-no-user` (133 words)
 - `role-no-login` (133 words)
 
 ## Group intros
 
-- global_rules: Approved acronyms (51 words): written out, not in the load hints
+- global_rules: Approved acronyms (62 words): written out, not in the load hints
 - columns: Standard columns (46 words): written out, not in the load hints
 - columns: Currency (10 words): written out, not in the load hints
 - tables: Row lifecycle (22 words): written out, not in the load hints

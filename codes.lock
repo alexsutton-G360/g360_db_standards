@@ -60,6 +60,7 @@
     "RDBOB12": "umv-materialized-view-names",
     "RDBOB13": "role-no-login",
     "RDBOB14": "user-and-service-account-names",
+    "RDBOB15": "shorten-long-constraint-names",
     "RDBRL1": "one-table-for-same-shape-rows",
     "RDBRL2": "source-type-id-pattern",
     "RDBRL3": "exclusive-arc-default",

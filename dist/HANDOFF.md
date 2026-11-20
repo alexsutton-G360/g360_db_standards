@@ -26,7 +26,7 @@ fixed sections were copied from. Then run `node .claude/scripts/check-claude.mjs
 
 ## The rules
 
-No rule is left out. Together the rule files come to about 42 KB, about 10k tokens if all of them load.
+No rule is left out. Together the rule files come to about 43 KB, about 10k tokens if all of them load.
 
 | File | Acronym | Rules | Codes | Size |
 |---|---|---|---|---|
@@ -36,7 +36,7 @@ No rule is left out. Together the rule files come to about 42 KB, about 10k toke
 | `db_currency_conventions.md` | `RDBCY` | 7 | RDBCY1 to RDBCY7 | 3.9 KB |
 | `db_table_conventions.md` | `RDBTB` | 7 | RDBTB1 to RDBTB7 | 4.9 KB |
 | `db_relationship_conventions.md` | `RDBRL` | 7 | RDBRL1 to RDBRL7 | 5.0 KB |
-| `db_object_conventions.md` | `RDBOB` | 14 | RDBOB1 to RDBOB14 | 7.0 KB |
+| `db_object_conventions.md` | `RDBOB` | 15 | RDBOB1 to RDBOB15 | 8.0 KB |
 
 The `RDB` prefix is reserved for these files, and the maintainer of the guidance repository has agreed to it.
 A code, once assigned, is permanent: suppression markers in service code name a rule by its code. The codes

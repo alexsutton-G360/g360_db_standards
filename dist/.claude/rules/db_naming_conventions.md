@@ -17,7 +17,7 @@ RDBNM2: when a change names any database object, put an underscore between the w
 
 RDBNM3: when a change names any database object, use only letters, digits, and underscores (`guest_users`, not `guest-users`, `guest users`, or `guest_users$`). [Rule; slug: no-special-characters-in-names; full rule: .claude/examples/db_standards/no-special-characters-in-names.md]
 
-RDBNM4: when a change names any database object, choose clear, commonly accepted words, and abbreviate only with an approved acronym (`customer_account`, not `cust_acct`); the approved list is the reference file `approved-acronyms`. Reason: a newcomer who has never heard an abbreviation cannot guess it and cannot search for it. [Default; slug: spell-out-names-approved-acronyms; full rule: .claude/examples/db_standards/spell-out-names-approved-acronyms.md]
+RDBNM4: when a change names any database object, use the approved short form wherever the term has one (`meeting_room_sqft`, not `meeting_room_square_feet`) and spell every other word out (`customer_account`, not `cust_acct`); the approved short forms are in the reference file `approved-acronyms`. Reason: a newcomer who has never heard an abbreviation cannot guess it and cannot search for it. [Default; slug: spell-out-names-approved-acronyms; full rule: .claude/examples/db_standards/spell-out-names-approved-acronyms.md]
 
 ## Naming
 

@@ -1,7 +1,7 @@
 {
   "generated_from": "pages/*.md",
   "counts": {
-    "rules": 73,
+    "rules": 74,
     "stories": 20,
     "principles": 5,
     "reference": 1,
@@ -72,7 +72,7 @@
     },
     {
       "slug": "spell-out-names-approved-acronyms",
-      "title": "Spell names out in common terms, and abbreviate only with an approved acronym",
+      "title": "Spell names out in common terms, and use an approved short form where one exists",
       "page": "global_rules",
       "group": "Global Rules",
       "temperature": "Default",
@@ -84,9 +84,9 @@
       "cites_stories": [],
       "stories": [],
       "has_companion": false,
-      "words_full": 61,
-      "words_brisk": 61,
-      "agent": "when a change names any database object, choose clear, commonly accepted words, and abbreviate only with an approved acronym (`customer_account`, not `cust_acct`); the approved list is the reference file `approved-acronyms`. Reason: a newcomer who has never heard an abbreviation cannot guess it and cannot search for it.",
+      "words_full": 136,
+      "words_brisk": 136,
+      "agent": "when a change names any database object, use the approved short form wherever the term has one (`meeting_room_sqft`, not `meeting_room_square_feet`) and spell every other word out (`customer_account`, not `cust_acct`); the approved short forms are in the reference file `approved-acronyms`. Reason: a newcomer who has never heard an abbreviation cannot guess it and cannot search for it.",
       "brisk_file": "rules/spell-out-names-approved-acronyms.md",
       "companion_file": null
     },
@@ -1383,9 +1383,9 @@
       "cites_stories": [],
       "stories": [],
       "has_companion": false,
-      "words_full": 135,
-      "words_brisk": 135,
-      "agent": "when a migration creates a primary key or a foreign key, name the constraint when creating it: `pk_<table>` for a primary key and `fk_<table>_<column>` for a foreign key (`pk_users`, `fk_notes_user_id`), never a default such as `notes_pkey`. Postgres cuts a name at 63 characters, so shorten the table or column part and keep the prefix. Reason: the pattern is a house convention, and consistency is what lets a reader tell an object from its name.",
+      "words_full": 137,
+      "words_brisk": 137,
+      "agent": "when a migration creates a primary key or a foreign key, name the constraint when creating it: `pk_<table>` for a primary key and `fk_<table>_<column>` for a foreign key (`pk_users`, `fk_notes_user_id`), never a default such as `notes_pkey`. Postgres cuts a name at 63 characters, so when a name would run past that, keep the prefix and shorten it as the rule on long constraint and index names describes (`shorten-long-constraint-names`). Reason: the pattern is a house convention, and consistency is what lets a reader tell an object from its name.",
       "brisk_file": "rules/pk-and-fk-names.md",
       "companion_file": null
     },
@@ -1427,6 +1427,26 @@
       "words_brisk": 67,
       "agent": "when a migration creates a standalone index, name it `idx_<table>_<column>` for its table and the columns it covers (`idx_users_first_name`), not the name Postgres would give it; an index that a primary key or unique constraint creates keeps that constraint's name. Reason: the pattern is a house convention, and consistency is what lets a reader tell an object from its name.",
       "brisk_file": "rules/idx-index-names.md",
+      "companion_file": null
+    },
+    {
+      "slug": "shorten-long-constraint-names",
+      "title": "When a constraint or index name would pass 63 characters, shorten it from the table of short forms",
+      "page": "other_objects",
+      "group": "Keys, constraints, and indexes",
+      "temperature": "Default",
+      "origin": "house",
+      "scope": "constraint",
+      "why": "object-naming",
+      "second_opinion": "DBA or Data Architect.",
+      "cites_rules": [],
+      "cites_stories": [],
+      "stories": [],
+      "has_companion": false,
+      "words_full": 307,
+      "words_brisk": 307,
+      "agent": "when a migration creates a constraint or index whose name would pass 63 characters, spell every word out where the name fits; where it does not, use the approved short forms first, then the table Short forms for names at the limit in the reference file `approved-acronyms`, largest saving first, until the longest name on the table fits, and use the same short forms for every constraint and index on that table. If it still does not fit, rename the table. Reason: Postgres cuts a name at 63 characters, and two cut names can collide without any error.",
+      "brisk_file": "rules/shorten-long-constraint-names.md",
       "companion_file": null
     },
     {
@@ -1979,6 +1999,7 @@
         "pk-and-fk-names",
         "ctx-constraint-names",
         "idx-index-names",
+        "shorten-long-constraint-names",
         "trg-trigger-names",
         "ufn-function-names",
         "usp-procedure-names",

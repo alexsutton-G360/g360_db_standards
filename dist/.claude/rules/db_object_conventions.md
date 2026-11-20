@@ -7,6 +7,8 @@ All database objects rules are enumerated using the RDBOB (Rules DataBase OBject
 
 > Generated from the Groups360 database standards repository. Edit the pages there, not this file.
 
+Short forms for constraint and index names over 63 characters are in .claude/examples/db_standards/approved-acronyms.md, in the section Short forms for names at the limit.
+
 ## Databases and schemas
 
 RDBOB1: when a change creates or names a database, make the name lowercase, singular, short, and descriptive, with underscores between words where there is more than one (one word is preferred); a test copy takes the same name with a suffix (`booking_service`, `booking_service_test`, not `bookings`). Reason: the pattern is a house convention, and consistency is what lets a reader tell an object from its name. Second opinion: DBA. [Rule; slug: database-name-form; full rule: .claude/examples/db_standards/database-name-form.md]
@@ -19,11 +21,13 @@ RDBOB4: when a change creates a schema, do not name it after its own database (a
 
 ## Keys, constraints, and indexes
 
-RDBOB5: when a migration creates a primary key or a foreign key, name the constraint when creating it: `pk_<table>` for a primary key and `fk_<table>_<column>` for a foreign key (`pk_users`, `fk_notes_user_id`), never a default such as `notes_pkey`. Postgres cuts a name at 63 characters, so shorten the table or column part and keep the prefix. Reason: the pattern is a house convention, and consistency is what lets a reader tell an object from its name. Second opinion: DBA. [Rule; slug: pk-and-fk-names; full rule: .claude/examples/db_standards/pk-and-fk-names.md]
+RDBOB5: when a migration creates a primary key or a foreign key, name the constraint when creating it: `pk_<table>` for a primary key and `fk_<table>_<column>` for a foreign key (`pk_users`, `fk_notes_user_id`), never a default such as `notes_pkey`. Postgres cuts a name at 63 characters, so when a name would run past that, keep the prefix and shorten it as the rule on long constraint and index names describes (`shorten-long-constraint-names`). Reason: the pattern is a house convention, and consistency is what lets a reader tell an object from its name. Second opinion: DBA. [Rule; slug: pk-and-fk-names; full rule: .claude/examples/db_standards/pk-and-fk-names.md]
 
 RDBOB6: when a migration creates a check, unique, or exclusion constraint, name it `ctx_<descriptor>` for what it enforces (`ctx_exactly_one_parent`, `ctx_unique_note_rfp`), never a default such as `notes_body_check`; the index behind a unique constraint keeps the `ctx_` name. Reason: the pattern is a house convention, and consistency is what lets a reader tell an object from its name. Second opinion: DBA. [Rule; slug: ctx-constraint-names; full rule: .claude/examples/db_standards/ctx-constraint-names.md]
 
 RDBOB7: when a migration creates a standalone index, name it `idx_<table>_<column>` for its table and the columns it covers (`idx_users_first_name`), not the name Postgres would give it; an index that a primary key or unique constraint creates keeps that constraint's name. Reason: the pattern is a house convention, and consistency is what lets a reader tell an object from its name. Second opinion: DBA. [Rule; slug: idx-index-names; full rule: .claude/examples/db_standards/idx-index-names.md]
+
+RDBOB15: when a migration creates a constraint or index whose name would pass 63 characters, spell every word out where the name fits; where it does not, use the approved short forms first, then the table Short forms for names at the limit in the reference file `approved-acronyms`, largest saving first, until the longest name on the table fits, and use the same short forms for every constraint and index on that table. If it still does not fit, rename the table. Reason: Postgres cuts a name at 63 characters, and two cut names can collide without any error. Second opinion: DBA or Data Architect. [Default; slug: shorten-long-constraint-names; full rule: .claude/examples/db_standards/shorten-long-constraint-names.md]
 
 ## Triggers, functions, procedures, and views
 

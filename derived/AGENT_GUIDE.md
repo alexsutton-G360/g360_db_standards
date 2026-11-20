@@ -23,7 +23,7 @@ agent can load only what a change needs. This set is generated from the wiki pag
 | scope | rules | load when |
 |---|---|---|
 | `column` | 36 | the change adds, alters, or names a column |
-| `constraint` | 2 | the change adds or names a key or a constraint |
+| `constraint` | 3 | the change adds or names a key or a constraint |
 | `database` | 1 | the change creates or names a database |
 | `function` | 1 | the change adds or names a function |
 | `index` | 1 | the change adds or names an index |

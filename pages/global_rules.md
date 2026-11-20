@@ -50,25 +50,27 @@ Agent: when a change names any database object, use only letters, digits, and un
 
 ---
 
-### Spell names out in common terms, and abbreviate only with an approved acronym
+### Spell names out in common terms, and use an approved short form where one exists
 [Slug: spell-out-names-approved-acronyms · Temperature: Default · Origin: general · Scope: global · Why: clear-terms]
 
-Choose clear, commonly accepted words for names. Do not invent abbreviations that only Groups360 uses. A short form is fine when it appears in the approved acronym list below.
+Choose clear, commonly accepted words for names. Do not invent abbreviations that only Groups360 uses. When a term has a short form in the approved acronym tables below, use the short form everywhere: `sqft`, not `square_feet`. Spell out every other word.
 
-Because: a newcomer who has never heard an abbreviation cannot guess it, and cannot search for it either.
+When a constraint or index name runs into Postgres's 63-character limit, the rule on shortening long names (see Keys, constraints, and indexes on Other objects and tools) adds a second, separate table of short forms for that case only.
 
-Good: `customer_account`
-Bad:  `cust_acct`
+Because: a newcomer who has never heard an abbreviation cannot guess it, and cannot search for it. The approved tables hold the short forms that have been agreed, so using them keeps names guessable and the same across the platform.
+
+Good: `customer_account`, `meeting_room_sqft`
+Bad:  `cust_acct`, `meeting_room_square_feet`
 
 Applies to every object unless its own page says otherwise.
 
-Agent: when a change names any database object, choose clear, commonly accepted words, and abbreviate only with an approved acronym (`customer_account`, not `cust_acct`); the approved list is the reference file `approved-acronyms`. Reason: a newcomer who has never heard an abbreviation cannot guess it and cannot search for it.
+Agent: when a change names any database object, use the approved short form wherever the term has one (`meeting_room_sqft`, not `meeting_room_square_feet`) and spell every other word out (`customer_account`, not `cust_acct`); the approved short forms are in the reference file `approved-acronyms`. Reason: a newcomer who has never heard an abbreviation cannot guess it and cannot search for it.
 
 ---
 
 ## Approved acronyms
 
-This list is a reference, not a rule. It records which short forms Groups360 has agreed on, so a name that uses one is still guessable. It is a house list: nothing here is right outside Groups360, it is only consistent inside it. Add to it deliberately, and keep entries lowercase.
+This list records which short forms Groups360 has agreed on. Use them wherever the term appears in a name: a name that uses one is still guessable, and the same term is written the same way everywhere. It is a house list: nothing here is right outside Groups360, it is only consistent inside it. Add to it deliberately, and keep entries lowercase.
 
 ### General technology terms
 
@@ -116,3 +118,17 @@ This list is a reference, not a rule. It records which short forms Groups360 has
 | Property management system | `pms` |
 | Central reservation system | `crs` |
 | Square feet | `sqft` |
+
+### Short forms for names at the limit
+
+This table is not part of the everyday list above. It is for the case where a name is up against Postgres's 63-character limit, which happens when a table already has a long name and its constraints and indexes repeat that name and add column names. Use it only then, and only for constraint and index names. The default is still to spell every word out. The table and its columns are never shortened from this list.
+
+Words are listed by the most characters they save, so the largest saving is easy to find. Each short form stands for one word only, so a short form is never reused for another word. Add a word deliberately, and never change or remove one that a name already uses.
+
+| Word | Short form | Saves |
+|---|---|---|
+| configuration | `cfg` | 10 |
+| reservation | `rsvtn` | 6 |
+| template | `tmplt` | 3 |
+| agenda | `agnd` | 2 |
+| count | `cnt` | 2 |

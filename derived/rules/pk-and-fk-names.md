@@ -17,7 +17,7 @@ Name the constraint when you create it. A primary key left unnamed gets a defaul
 
 A foreign key creates a constraint and no index, so there is no such thing as a foreign key index. Whether the column needs an index is a separate question, answered under Indexes on Tables.
 
-Postgres cuts any name at 63 characters and gives only a notice, and two names cut to the same text will collide. When a pattern would run past that, shorten the table or column part and keep the prefix.
+Postgres cuts any name at 63 characters and gives only a notice, and two names cut to the same text will collide. When a pattern would run past that, keep the prefix and follow the rule on shortening long names, below.
 
 Because: the pattern is a house convention, and consistency is what lets a reader tell an object from its name.
 

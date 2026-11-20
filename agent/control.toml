@@ -91,5 +91,6 @@ acronym = "RDBOB"
 meaning = "Rules DataBase OBject conventions"
 title = "Database objects"
 description = "Conventions for databases, schemas, constraints, indexes, triggers, functions, views, roles, and users. Apply when a migration creates or names one."
+note = "Short forms for constraint and index names over 63 characters are in .claude/examples/db_standards/approved-acronyms.md, in the section Short forms for names at the limit."
 skip = "Skip this section if the change creates or names no database, schema, constraint, index, trigger, function, procedure, view, role, or user."
 groups = [["other_objects", "Databases and schemas"], ["other_objects", "Keys, constraints, and indexes"], ["other_objects", "Triggers, functions, procedures, and views"], ["other_objects", "Roles and users"]]
